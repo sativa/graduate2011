@@ -1,0 +1,24 @@
+数据类型：
+ParticleEmitter		粒子系统
+Transform		位置相关
+Rigidbody		刚体
+Vector3			表示前后上方向，如Vector3.forward表示向前
+
+
+常用的游戏对象中的变量：
+velocity			速度
+transform.position		位置
+transform.rotation		旋转
+transform.rotation.eulerAngles	欧拉角度，对应的是可视界面上的角度
+
+
+常用函数：
+Input.GetKeyDown(KeyCode.Return)	//按下回车键
+Input.GetKey(KeyCode.Return)		//按住回车键
+Instantiate				//复制游戏对象（但是必须是perfab）
+Destroy(gameObject)			//销毁当前脚本所附在的游戏对象，切记，不能删除其他的游戏对象，否则出错
+yield WaitForSeconds (3)		//等待3秒钟，参数是float的
+
+
+常用事件：
+function OnCollisionEnter(collision : Collision) {}	//进入碰撞区域
