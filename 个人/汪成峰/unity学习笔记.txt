@@ -22,3 +22,6 @@ yield WaitForSeconds (3)		//等待3秒钟，参数是float的
 
 常用事件：
 function OnCollisionEnter(collision : Collision) {}	//进入碰撞区域
+
+其他：
+如果用cube套着一个子弹作为perfab，且在作为perfab之前Mesh Render没取消，那么取消之后必须更新perfab才会起作用（切记，复制的物体属性和perfab是一样的）
