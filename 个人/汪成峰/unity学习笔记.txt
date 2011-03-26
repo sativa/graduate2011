@@ -18,10 +18,13 @@ Input.GetKey(KeyCode.Return)		//按住回车键
 Instantiate				//复制游戏对象（但是必须是perfab）
 Destroy(gameObject)			//销毁当前脚本所附在的游戏对象，切记，不能删除其他的游戏对象，否则出错
 yield WaitForSeconds (3)		//等待3秒钟，参数是float的
-
+transform.Translate(Vector3.forward * Time.deltaTime)	//Vector只能乘以float，不能是double，若自己写个小数必须写成0.01f这样的
 
 常用事件：
 function OnCollisionEnter(collision : Collision) {}	//进入碰撞区域
 
 其他：
-如果用cube套着一个子弹作为perfab，且在作为perfab之前Mesh Render没取消，那么取消之后必须更新perfab才会起作用（切记，复制的物体属性和perfab是一样的）
+1、如果用cube套着一个子弹作为perfab，且在作为perfab之前Mesh Render没取消，那么取消之后必须更新perfab才会起作用（切记，复制的物体属性和perfab是一样的）
+2、使用另一个GameObject中的script定义的变量
+objectA = GameObject.find("ObjectA")
+var script : ScriptName = objectA.GetComponent(ScriptName);
