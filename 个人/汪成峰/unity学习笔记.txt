@@ -28,7 +28,11 @@ OnGUI函数是重绘GUI必定执行的，绘制窗口必须在这里执行
 GUI.skin是设置窗口的皮肤
 GUI.Window是显示窗口，显示的窗口是在skin里设置的，包括贴图什么的
 GUI Skin是在Project中右键新建GUI Skin创建的，之后在脚本里写一个public GUISkin skin;再将创建的这个skin拖动上去就好了
-GUILayout.Label可以在这个窗口的相对位置打字
+最重要：GUILayout.Label可以在这个窗口的相对位置打字
+GUILayout.BeginVertical();后面写的都是在这一行
+GUILayout.BeginHorizontal();后面一次写一行
+GUILayout.EndHorizontal();结束一次写一行这种方式
+GUILayout.Space(5);空5格
 
 其他：
 1、如果用cube套着一个子弹作为perfab，且在作为perfab之前Mesh Render没取消，那么取消之后必须更新perfab才会起作用（切记，复制的物体属性和perfab是一样的）
