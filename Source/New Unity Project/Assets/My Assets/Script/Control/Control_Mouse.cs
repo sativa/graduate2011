@@ -10,7 +10,6 @@ public class Control_Mouse : MonoBehaviour {
 	void Start () {
 
         Screen.showCursor = false; // 默认关闭光标，无状态时打开
-        
 	}
 	
 	// Update is called once per frame
@@ -23,6 +22,7 @@ public class Control_Mouse : MonoBehaviour {
 	}
     void OnGUI()
     {
+        GUI.depth = 0;
 
         // 按照按钮的顺序定义 Assart Seminate Reap Irrigation Fertilizer Weed Pet Disease
         if (Control_Game.mouse.state == CMouseState.None)

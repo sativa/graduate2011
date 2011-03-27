@@ -3,11 +3,13 @@ using System.Collections;
 
 public class Mod_Pet : MonoBehaviour {
 
-    public GameObject paticle;
-    public GameObject[] targetList;
-    public float moveSpeed = 2.0f;
+
+    public float moveSpeed = 2;
     public float pickNextWaypointDistance = 2.0f;
     public float pickNextWaypointRotation = 3.0f;
+    public GameObject paticle;
+    public GameObject[] targetList;
+
 
     GameObject curTarget;   // 当前目标
     int index;

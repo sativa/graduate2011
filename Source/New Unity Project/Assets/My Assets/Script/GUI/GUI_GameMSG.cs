@@ -21,6 +21,8 @@ public class GUI_GameMSG : MonoBehaviour {
 
     void OnGUI()
     {
+        GUI.depth = 99;
+
         GUI.Window(0, pos, GameInfoWindow, "提示信息");
     }
 

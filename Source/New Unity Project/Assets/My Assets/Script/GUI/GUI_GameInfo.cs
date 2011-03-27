@@ -2,10 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class GUI_GameInfo : MonoBehaviour {
+   
+    public GUISkin skin;
 
     public Texture backGRD;
     public Texture[] texMaizeState;  // 作物状态的贴图，分为4个状态，从0-3，以此是播种期 出芽期 出穗期 成熟期
 
+    private Rect posBackGRD;   // 详细信息的位置
     private Rect posDetail;   // 详细信息的位置
     private CFarm farm;
     private bool isShowFarmInfoGUI = false;
@@ -13,6 +16,7 @@ public class GUI_GameInfo : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
+        posBackGRD = new Rect(Screen.width * 0.7f-50, Screen.height * 0.1f, Screen.width * 0.3f - Screen.width * 0.01f+50, Screen.height * 0.58f - Screen.height * 0.025f);
         posDetail = new Rect(Screen.width * 0.7f, Screen.height * 0.1f, Screen.width * 0.3f - Screen.width * 0.01f, Screen.height * 0.58f - Screen.height * 0.025f);
 
     }
@@ -24,14 +28,15 @@ public class GUI_GameInfo : MonoBehaviour {
 
     void OnGUI()
     {
+        GUI.skin = skin;
         // 先绘制详细信息，这样按钮就在该信息之上
         if (Control_Game.bShowGameInfoGUI)
         {
             // 背景图绘制
-            //GUI.Label(posDetail, backGRD);
+            GUI.DrawTexture(posBackGRD, backGRD,ScaleMode.StretchToFill,true);
 
-            //GUI.Window(1, posDetail, GameInfoWindow, "游戏信息");
-			GUI.Window(1, posDetail, GameInfoWindow, backGRD);
+            GUI.Window(1, posDetail, GameInfoWindow, "游戏信息");
+			//GUI.Window(1, posDetail, GameInfoWindow, backGRD);
         }
 
         

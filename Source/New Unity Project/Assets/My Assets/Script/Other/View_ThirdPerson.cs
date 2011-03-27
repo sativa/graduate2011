@@ -32,8 +32,13 @@ public class View_ThirdPerson : MonoBehaviour {
             else 
             transform.Translate(0, -f*5, 0);
              * */
+            GetComponentInChildren<Camera>().orthographicSize += f * 5;
 
-            GetComponentInChildren<Camera>().orthographicSize += f*5;
+            // ≥¨æ‡¥¶¿Ì
+            if (GetComponentInChildren<Camera>().orthographicSize >= camSizeFar)
+                GetComponentInChildren<Camera>().orthographicSize = camSizeFar;
+            if (GetComponentInChildren<Camera>().orthographicSize <= camSizeNear)
+                GetComponentInChildren<Camera>().orthographicSize = camSizeNear;
         }
         
         
