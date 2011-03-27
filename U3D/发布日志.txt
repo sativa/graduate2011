@@ -1,4 +1,11 @@
 2011年3月27日	U3DV1.8
+·细节修改-汪成峰
+··修改原来玉米图为卡通图，将玉米5个状态的图用透明图替代
+··地形改用自带的terrain，因为可以画图，地形的地图保存在My Assets\Texture\Model的Grass（Hill）中
+··农田的纹理，用到My Assets\Texture\Model的另外一个psd的图（本来准备用来刷地形）
+··将摄像机拉远
+··加入进入界面（脚本在Script\BeginScene使其从开始界面跳转到农场界面）
+
 ·添加
 ··可使用滚轴自由拉近拉远相机，"Third Person"/"View_ThirdPerson"中的属性修改相机移动速度，相机近面远面
 ··田鼠移动速度开放,"Pet"/"moveSpeed"
