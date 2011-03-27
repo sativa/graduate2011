@@ -23,6 +23,13 @@ transform.Translate(Vector3.forward * Time.deltaTime)	//VectorÖ»ÄÜ³ËÒÔfloat£¬²»Ä
 ³£ÓÃÊÂ¼ş£º
 function OnCollisionEnter(collision : Collision) {}	//½øÈëÅö×²ÇøÓò
 
+GUI²¿·Ö£º
+OnGUIº¯ÊıÊÇÖØ»æGUI±Ø¶¨Ö´ĞĞµÄ£¬»æÖÆ´°¿Ú±ØĞëÔÚÕâÀïÖ´ĞĞ
+GUI.skinÊÇÉèÖÃ´°¿ÚµÄÆ¤·ô
+GUI.WindowÊÇÏÔÊ¾´°¿Ú£¬ÏÔÊ¾µÄ´°¿ÚÊÇÔÚskinÀïÉèÖÃµÄ£¬°üÀ¨ÌùÍ¼Ê²Ã´µÄ
+GUI SkinÊÇÔÚProjectÖĞÓÒ¼üĞÂ½¨GUI Skin´´½¨µÄ£¬Ö®ºóÔÚ½Å±¾ÀïĞ´Ò»¸öpublic GUISkin skin;ÔÙ½«´´½¨µÄÕâ¸öskinÍÏ¶¯ÉÏÈ¥¾ÍºÃÁË
+GUILayout.Label¿ÉÒÔÔÚÕâ¸ö´°¿ÚµÄÏà¶ÔÎ»ÖÃ´ò×Ö
+
 ÆäËû£º
 1¡¢Èç¹ûÓÃcubeÌ××ÅÒ»¸ö×Óµ¯×÷Îªperfab£¬ÇÒÔÚ×÷ÎªperfabÖ®Ç°Mesh RenderÃ»È¡Ïû£¬ÄÇÃ´È¡ÏûÖ®ºó±ØĞë¸üĞÂperfab²Å»áÆğ×÷ÓÃ£¨ÇĞ¼Ç£¬¸´ÖÆµÄÎïÌåÊôĞÔºÍperfabÊÇÒ»ÑùµÄ£©
 2¡¢Ê¹ÓÃÁíÒ»¸öGameObjectÖĞµÄscript¶¨ÒåµÄ±äÁ¿
