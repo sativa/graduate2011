@@ -28,3 +28,4 @@ function OnCollisionEnter(collision : Collision) {}	//进入碰撞区域
 2、使用另一个GameObject中的script定义的变量
 objectA = GameObject.find("ObjectA")
 var script : ScriptName = objectA.GetComponent(ScriptName);
+3、GUI.depth用在OnGUI函数中，在绘制之前确定要绘制的深度
