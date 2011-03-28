@@ -22,8 +22,14 @@ transform.Translate(Vector3.forward * Time.deltaTime)	//VectorÖ»ÄÜ³ËÒÔfloat£¬²»Ä
 
 ³£ÓÃÊÂ¼ş£º
 function OnCollisionEnter(collision : Collision) {}	//½øÈëÅö×²ÇøÓò
+OnMouseDown()	//Êó±êµã»÷ÊÂ¼ş£¬½«Õâ¸öĞ´ÔÚ½Å±¾ÖĞ£¬ÔÙÍÏ¶¯µ½ÏëÒªÏìÓ¦µã»÷ÊÂ¼şµÄ¶ÔÏóÉÏ£¬Ôò¿ÉÒÔÊµÏÖ¶ÔÊó±êµã»÷ÊÂ¼şµÄÏìÓ¦
 
 GUI²¿·Ö£º
+	¹Ì¶¨ÌùÍ¼£ºÊ¹ÓÃGUITexture¿Ø¼ş£¬Í¼Æ¬ÍÏ×§ÉÏÈ¥£¬ÔÙÔÚÃæ°åÖĞµ÷ÕûÍ¼Æ¬´óĞ¡¡¢Î»ÖÃµÈ
+	¶¯Ì¬Éú³ÉÍ¼£º
+GUI.Windowº¯Êı´´½¨´°¿Ú£¬GUILayout.LabelÔÚ´´½¨µÄ´°¿ÚÉÏÃæ»­¶«Î÷»òÕßĞ´¶«Î÷
+GUI.skinÖ¸¶¨¶Ô»°¿òÆ¤·ô£¬Æ¤·ôÊÇÔÚProjectÖĞÓÒ¼üCreateÑ¡ÔñGUI Skin´´½¨µÄ£¨Ö¸¶¨skinÖ®ºóÄ¬ÈÏµÄÆ¤·ô¾Í»áÏûÊ§£©
+	ÆäËû£º
 OnGUIº¯ÊıÊÇÖØ»æGUI±Ø¶¨Ö´ĞĞµÄ£¬»æÖÆ´°¿Ú±ØĞëÔÚÕâÀïÖ´ĞĞ
 GUI.skinÊÇÉèÖÃ´°¿ÚµÄÆ¤·ô
 GUI.WindowÊÇÏÔÊ¾´°¿Ú£¬ÏÔÊ¾µÄ´°¿ÚÊÇÔÚskinÀïÉèÖÃµÄ£¬°üÀ¨ÌùÍ¼Ê²Ã´µÄ
@@ -40,3 +46,4 @@ GUILayout.Space(5);¿Õ5¸ñ
 objectA = GameObject.find("ObjectA")
 var script : ScriptName = objectA.GetComponent(ScriptName);
 3¡¢GUI.depthÓÃÔÚOnGUIº¯ÊıÖĞ£¬ÔÚ»æÖÆÖ®Ç°È·¶¨Òª»æÖÆµÄÉî¶È
+4¡¢Vector3 dir = Vector3.Lerp(transform.position, target.transform.position, Time.deltaTime * moveSpeed);¿ÉÒÔÊ¹µÃÒ»¸öÎïÌå´ÓÄ³Ò»Î»ÖÃÒÆ¶¯µ½ÁíÒ»Î»ÖÃ£¬²¢ÇÒËÙ¶È»á±äÂı
