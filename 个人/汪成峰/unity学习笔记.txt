@@ -47,3 +47,4 @@ objectA = GameObject.find("ObjectA")
 var script : ScriptName = objectA.GetComponent(ScriptName);
 3、GUI.depth用在OnGUI函数中，在绘制之前确定要绘制的深度
 4、Vector3 dir = Vector3.Lerp(transform.position, target.transform.position, Time.deltaTime * moveSpeed);可以使得一个物体从某一位置移动到另一位置，并且速度会变慢
+5、枚举类型的定义要放在类的外面才可以被其他类访问到，否则即使用了public也是白搭
