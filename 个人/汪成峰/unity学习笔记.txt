@@ -15,6 +15,9 @@ transform.rotation.eulerAngles	欧拉角度，对应的是可视界面上的角度
 常用函数：
 Input.GetKeyDown(KeyCode.Return)	//按下回车键
 Input.GetKey(KeyCode.Return)		//按住回车键
+！！前面2个函数在跨平台的时候不能用，推荐使用下面这种函数
+Input.GetButton("Jump")			//按下跳键，PC机默认是空格
+Input.GetAxis ("Vertical") 		//获得垂直轴力度，按下w键或者↑会到1，按下s键或↓会到-1
 Instantiate				//复制游戏对象（但是必须是perfab）
 Destroy(gameObject)			//销毁当前脚本所附在的游戏对象，切记，不能删除其他的游戏对象，否则出错
 yield WaitForSeconds (3)		//等待3秒钟，参数是float的
