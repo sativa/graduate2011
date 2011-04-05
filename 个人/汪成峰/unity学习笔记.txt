@@ -1,3 +1,8 @@
+单例模式：
+添加静态private自己类
+getInstance静态公有函数获得它
+在Start()函数里写instance = this;
+
 数据类型：
 ParticleEmitter		粒子系统
 Transform		位置相关
