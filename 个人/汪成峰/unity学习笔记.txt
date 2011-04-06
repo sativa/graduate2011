@@ -48,6 +48,10 @@ GUILayout.BeginHorizontal();后面一次写一行
 GUILayout.EndHorizontal();结束一次写一行这种方式
 GUILayout.Space(5);空5格
 
+触发器：
+Box Collider中的Is Trigger勾选
+脚本中void OnTriggerEnter(Collider other)事件是进入该区域的时间
+
 其他：
 1、如果用cube套着一个子弹作为perfab，且在作为perfab之前Mesh Render没取消，那么取消之后必须更新perfab才会起作用（切记，复制的物体属性和perfab是一样的）
 2、使用另一个GameObject中的script定义的变量
