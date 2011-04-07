@@ -61,3 +61,4 @@ var script : ScriptName = objectA.GetComponent(ScriptName);
 4、Vector3 dir = Vector3.Lerp(transform.position, target.transform.position, Time.deltaTime * moveSpeed);可以使得一个物体从某一位置移动到另一位置，并且速度会变慢
 5、枚举类型的定义要放在类的外面才可以被其他类访问到，否则即使用了public也是白搭
 6、淡入淡出效果：每次绘制一幅黑色的图，alpha值会变而已，具体见地震demo项目
+7、添加美术资源后框上所有的部分，添加mesh collider即可
