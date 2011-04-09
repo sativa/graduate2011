@@ -52,6 +52,14 @@ GUILayout.Space(5);空5格
 Box Collider中的Is Trigger勾选
 脚本中void OnTriggerEnter(Collider other)事件是进入该区域的时间
 
+禁用某个GameObject或禁用某个Component：
+gameObject.active = false;	//禁用这个脚本所附加在的GameObject
+movSreenRef.GetComponent<ScriptName>().enabled = false;	//将某个GameObject上的某个Component禁用
+
+遍历数组：
+MeshRenderer[] schoolbagMesh =……
+foreach(MeshRenderer temp in schoolbagMesh)……
+
 其他：
 1、如果用cube套着一个子弹作为perfab，且在作为perfab之前Mesh Render没取消，那么取消之后必须更新perfab才会起作用（切记，复制的物体属性和perfab是一样的）
 2、使用另一个GameObject中的script定义的变量
@@ -61,4 +69,5 @@ var script : ScriptName = objectA.GetComponent(ScriptName);
 4、Vector3 dir = Vector3.Lerp(transform.position, target.transform.position, Time.deltaTime * moveSpeed);可以使得一个物体从某一位置移动到另一位置，并且速度会变慢
 5、枚举类型的定义要放在类的外面才可以被其他类访问到，否则即使用了public也是白搭
 6、淡入淡出效果：每次绘制一幅黑色的图，alpha值会变而已，具体见地震demo项目
-7、添加美术资源后框上所有的部分，添加mesh collider即可
+7、添加美术资源后框上所有的部分，添加mesh collider即可（或者添加box collider，即可在外面添加一个方块碰撞）
+8、CharacterController可以实现人物的控制，并且自带刚体
