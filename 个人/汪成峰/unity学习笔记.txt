@@ -60,6 +60,10 @@ movSreenRef.GetComponent<ScriptName>().enabled = false;	//将某个GameObject上的某
 MeshRenderer[] schoolbagMesh =……
 foreach(MeshRenderer temp in schoolbagMesh)……
 
+摄像机使用技巧：
+加入判断if(Physics.Linecast (target.position, position, out hit))，可以避免在玩家-墙-摄像机导致看不到玩家这种情况
+注意：在U3D面板中将玩家和不需要判断的GameObject的layer选择Ignore Raycast，否则玩家跑快了会自己挡住自己！！
+
 其他：
 1、如果用cube套着一个子弹作为perfab，且在作为perfab之前Mesh Render没取消，那么取消之后必须更新perfab才会起作用（切记，复制的物体属性和perfab是一样的）
 2、使用另一个GameObject中的script定义的变量
