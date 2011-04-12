@@ -18,14 +18,22 @@ namespace CeresMaize_Console_CS
         public bool isSeminate = false;    // 因测试需要才设定public，在U3D中将测试
         public bool isReap = false;    // 因测试需要才设定public，在U3D中将测试
         // 修改下面的4个值会影响系统计算，在InitIrrigation和InitFertilizer中会自动调用
+        public CSoilInfo soilInfo;
+        
         public int soilWater = 40;
         public int soilN = 2;
         public int soilP = 1;
         public int soilK = 3;
 
+        //农作物的数量和质量
+        public int cropQuality = 100;
+        public int cropNumber = 30;
+
         public CFarm(string name)
         {
             farmName = name;
+
+            soilInfo = new CSoilInfo();
         }
 
         public bool Assart()
