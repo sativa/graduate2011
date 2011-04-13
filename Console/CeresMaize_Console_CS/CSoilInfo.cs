@@ -20,21 +20,17 @@ namespace CeresMaize_Console_CS
 
         private float[] punishmentRecord = new float[5];        //记录惩罚措施里累计的时间
 
-        private float[,] punishmentInfo = new float[5, 8];     //惩罚的相关信息
-        private int[,] playInfoSet = new int[2, 4];            //需要将土壤成分设置为***的相关信息
-        private float[,] playInfoChange = new float[6, 4];     //操作改变土壤的相关信息
+        private float[,] SoilInfoPunish = new float[5, 8];     //惩罚的相关信息
+        private int[,] SoilInfoInit = new int[2, 4];            //需要将土壤成分设置为***的相关信息
+        private float[,] SoilInfoChange = new float[6, 4];     //操作改变土壤的相关信息
 
-        public CSoilInfo(int w,int n,int p,int k)
-        {
-            Water = w;
-            N = n;
-            P = p;
-            K = k;
-        }
+        private CFarm farm;  //  农田的引用
 
         //无参数的构造函数
-        public CSoilInfo()
+        public CSoilInfo(CFarm thisFarm)
         {
+            farm = thisFarm;
+
             readSoilInfo();
         }
 
@@ -44,42 +40,43 @@ namespace CeresMaize_Console_CS
             int i, j;
             string[] lines;     //保存每行的字符串
             string[] sp;        //保存行拆开后的字符串
+
             //
             //从文件获取惩罚相关数据
             //
-            lines = File.ReadAllLines("punishmentInfo.txt");
+            lines = File.ReadAllLines("SoilInfoPunish.txt");
             for (i = 0; i < 5; i++)
             {
                 sp = lines[i + 1].Split('\t');
                 for (j = 0; j < 8; j++)
                 {
-                    punishmentInfo[i, j] = Convert.ToSingle(sp[j + 1]);
+                    SoilInfoPunish[i, j] = Convert.ToSingle(sp[j + 1]);
                 }
             }
 
             //
             //从文件获取重置信息相关数据
             //
-            lines = File.ReadAllLines("playInfoSet.txt");
+            lines = File.ReadAllLines("SoilInfoInit.txt");
             for (i = 0; i < 2; i++)
             {
                 sp = lines[i + 1].Split('\t');
                 for (j = 0; j < 4; j++)
                 {
-                    playInfoSet[i, j] = Convert.ToInt32(sp[j + 1]);
+                    SoilInfoInit[i, j] = Convert.ToInt32(sp[j + 1]);
                 }
             }
 
             //
             //从文件操作改变土壤相关数据
             //
-            lines = File.ReadAllLines("playInfoChange.txt");
+            lines = File.ReadAllLines("SoilInfoChange.txt");
             for (i = 0; i < 6; i++)
             {
                 sp = lines[i + 1].Split('\t');
                 for (j = 0; j < 4; j++)
                 {
-                    playInfoChange[i, j] = Convert.ToSingle(sp[j + 1]);
+                    SoilInfoChange[i, j] = Convert.ToSingle(sp[j + 1]);
                 }
             }
         }
@@ -88,44 +85,57 @@ namespace CeresMaize_Console_CS
         /// 外界因素每日对土壤的影响
         /// </summary>
         /// <param name="farm">被影响的农田</param>
-        public void DailyUpdateEffect(CFarm farm)
+        public void DailyUpdateEffect()
         {
             //
-            //温度和光照造成的影响，这部分参数写死在程序里
+            //当日温度和光照造成的影响，这部分参数写死在程序里
             //
 
 
             //
             //每日对土地固定的影响
             //
-            changePlayInfo(4);
+            ChangeSoilInfo(4);
             if (farm.crop != null)   //如果农场的作物不为空，则作物也消耗
-                changePlayInfo(5);
+                ChangeSoilInfo(5);
         }
 
         /// <summary>
         /// 如果土地没满足条件，则执行每日惩罚
         /// </summary>
         /// <param name="farm">该农田的农作物被惩罚</param>
-        public void DailyUpdatePunishment(CFarm farm)
+        public void DailyUpdatePunishment()
         {
-            int i;
+            // 
 
-
-            for (i = 0; i < 5; i++)     //处罚累计时间自加
+             for (int i = 0; i < 5; i++)     //处罚累计时间自加
                 punishmentRecord[i]++;
         }
 
         /// <summary>
-        /// 利用playInfoChange的数据改变 水、N、P、K的数量
+        /// 利用SoilInfoInit的数据改变 水、N、P、K的数量
         /// </summary>
-        /// <param name="row">要利用playInfoChange的第row行的数据</param>
-        public void changePlayInfo(int row)
+        /// <param name="row">要利用SoilInfoInit的第row行的数据</param>
+        public void InitSoliInfo(int row)
         {
-            Water += playInfoChange[row, 0];
-            N += playInfoChange[row, 1];
-            P += playInfoChange[row, 2];
-            K += playInfoChange[row, 3];
+            if (SoilInfoInit[row, 0]!= -1)
+                Water = SoilInfoInit[row, 0];
+
+            N = SoilInfoInit[row, 1];
+            P = SoilInfoInit[row, 2];
+            K = SoilInfoInit[row, 3];
+        }
+
+        /// <summary>
+        /// 利用SoilInfoChange的数据改变 水、N、P、K的数量
+        /// </summary>
+        /// <param name="row">要利用SoilInfoChange的第row行的数据</param>
+        public void ChangeSoilInfo(int row)
+        {
+            Water += SoilInfoChange[row, 0];
+            N += SoilInfoChange[row, 1];
+            P += SoilInfoChange[row, 2];
+            K += SoilInfoChange[row, 3];
 
             //如果变化后小于0，则归0
             if (Water < 0)

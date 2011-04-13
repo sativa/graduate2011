@@ -70,13 +70,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="playInfoChange.txt">
+    <Content Include="SoilInfoChange.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="playInfoSet.txt">
+    <Content Include="SoilInfoInit.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="punishmentInfo.txt">
+    <Content Include="SoilInfoPunish.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

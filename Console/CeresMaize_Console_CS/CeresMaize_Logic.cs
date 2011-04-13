@@ -13,9 +13,9 @@ namespace CeresMaize_Console_CS
         private float coeFertilizer = 1; // coeffient Fertilizer
 
         #region ExpandFertilizer 接口成员
-        private int curFertilizer_N = 0;   // current Fertilizer add by User Action : Fertilize
-        private int curFertilizer_P = 0;
-        private int curFertilizer_K = 0;
+        private float curFertilizer_N = 0;   // current Fertilizer add by User Action : Fertilize
+        private float curFertilizer_P = 0;
+        private float curFertilizer_K = 0;
 
         private float optFertilizer_N = 0;   // optimization Fertilizer Different with Maize ISTAGE 
         private float optFertilizer_P = 0;
@@ -25,13 +25,13 @@ namespace CeresMaize_Console_CS
         private float offsetFertilizer_P = 0;
         private float offsetFertilizer_K = 0;
 
-        private int totalCurFertilizer_N = 0;  //sum of curFertilizer
-        private int totalCurFertilizer_P = 0;
-        private int totalCurFertilizer_K = 0;
+        private float totalCurFertilizer_N = 0;  //sum of curFertilizer
+        private float totalCurFertilizer_P = 0;
+        private float totalCurFertilizer_K = 0;
 
-        private int totalOptFertilizer_N = 0;  //sum of optFertilizer
-        private int totalOptFertilizer_P = 0;
-        private int totalOptFertilizer_K = 0;
+        private float totalOptFertilizer_N = 0;  //sum of optFertilizer
+        private float totalOptFertilizer_P = 0;
+        private float totalOptFertilizer_K = 0;
 
         public float CalFertilizer()
         {
@@ -39,7 +39,7 @@ namespace CeresMaize_Console_CS
             return CheckFertilizer();
         }
 
-        public void DoFertilizer(int n, int p, int k)
+        public void DoFertilizer(float n, float p, float k)
         {
             curFertilizer_N += n;
             curFertilizer_P += p;
@@ -53,7 +53,7 @@ namespace CeresMaize_Console_CS
         // call by Construct Auto
         public void InitFertilizer()
         {
-            DoFertilizer(farm.soilN,farm.soilP,farm.soilK);
+            DoFertilizer(farm.soilInfo.N, farm.soilInfo.P, farm.soilInfo.K);
             totalOptFertilizer_N = 18;
             totalOptFertilizer_P = 10;
             totalOptFertilizer_K = 20;
@@ -117,20 +117,20 @@ namespace CeresMaize_Console_CS
         #endregion
 
         #region ExpandIrrigation 接口成员
-        private int curWater = 0;     // current Water add by User Action : Irrigation 
-        private int optWater = 0;     // optimization Water Different with Maize ISTAGE   
+        private float curWater = 0;     // current Water add by User Action : Irrigation 
+        private float optWater = 0;     // optimization Water Different with Maize ISTAGE   
         private float avgWater = 0;   // average Water : sum of optWater see function getOptWaterandOffsetWater()
-        private int offsetWater = 0;  // offset Water 
+        private float offsetWater = 0;  // offset Water 
 
-        private int totalCurWater = 0;// sum of curWater
-        private int totalOptWater = 0;// sum of optWater   
+        private float totalCurWater = 0;// sum of curWater
+        private float totalOptWater = 0;// sum of optWater   
         public float CalIrrigation()
         {
             //SetOptWaterAndOffsetWater(); // 依据生长阶段设置最佳灌溉量，是否需要？？
             return CheckIrrigation();
         }
 
-        public void DoIrrigation(int water)
+        public void DoIrrigation(float water)
         {
             curWater += water;
             totalCurWater += water;
@@ -139,7 +139,7 @@ namespace CeresMaize_Console_CS
         // call by Construct
         public void InitIrrigation()
         {
-            DoIrrigation(farm.soilWater);
+            DoIrrigation(farm.soilInfo.Water);
             avgWater = 405;
             totalOptWater = 305;
         }

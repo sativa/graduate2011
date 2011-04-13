@@ -37,14 +37,14 @@ namespace CeresMaize_Console_CS
     public interface IExpandIrrigation
     {
         float CalIrrigation();
-        void DoIrrigation(int water);
+        void DoIrrigation(float water);
         void InitIrrigation(); //农田中的水
     }
 
     public interface IExpandFertilizer
     {
         float CalFertilizer();
-        void DoFertilizer(int n, int p, int k);
+        void DoFertilizer(float n, float p, float k);
         void InitFertilizer(); // 农田中的肥料
     }
     

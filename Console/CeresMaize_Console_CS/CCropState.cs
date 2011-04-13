@@ -62,6 +62,7 @@ namespace CeresMaize_Console_CS
                 + " 茎重：" + STMWT.ToString() + ","
                 + " 叶重：" + LFWT.ToString() + ","
                 + " 穗重：" + EARWT.ToString();
+
              
         }
     }

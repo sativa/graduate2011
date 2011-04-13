@@ -10,7 +10,9 @@ namespace CeresMaize_Console_CS
     // Singlton
     public class CTerrain
     {
-        static private CTerrain instance = new CTerrain();
+        static private CTerrain instance=new CTerrain();
+
+        public DateTime dt = new DateTime(2011, 1, 1);
 
         public int[] JDATE = new int[365];
         public float[] TEMPMX = new float[365];
@@ -23,9 +25,10 @@ namespace CeresMaize_Console_CS
             return instance;
         }
 
-        private CTerrain()
+        public void Init(string fileName)
         {
-            ReadTerrainInfo("1.Terrain");
+            ReadTerrainInfo(fileName);
+            instance = this;
         }
 
         void ReadTerrainInfo(string fileName)

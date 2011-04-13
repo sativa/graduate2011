@@ -17,14 +17,10 @@ namespace CeresMaize_Console_CS
         public bool isAssart = false;         // 因测试需要才设定public，在U3D中将测试
         public bool isSeminate = false;    // 因测试需要才设定public，在U3D中将测试
         public bool isReap = false;    // 因测试需要才设定public，在U3D中将测试
+
         // 修改下面的4个值会影响系统计算，在InitIrrigation和InitFertilizer中会自动调用
         public CSoilInfo soilInfo;
         
-        public int soilWater = 40;
-        public int soilN = 2;
-        public int soilP = 1;
-        public int soilK = 3;
-
         //农作物的数量和质量
         public int cropQuality = 100;
         public int cropNumber = 30;
@@ -33,7 +29,8 @@ namespace CeresMaize_Console_CS
         {
             farmName = name;
 
-            soilInfo = new CSoilInfo();
+            soilInfo = new CSoilInfo(this);
+            soilInfo.InitSoliInfo(0);
         }
 
         public bool Assart()
@@ -45,7 +42,11 @@ namespace CeresMaize_Console_CS
             }
             if (!CCoin.GetInstance().processCoin(CCoinState.Assart))	//必须确保钱够才可以继续
                 return false;
+
             isAssart = true;
+
+            soilInfo.InitSoliInfo(1);  // 土壤开垦的初始化
+
             CGameInfo.GetInstance().AddInfo(farmName + "完成开垦");
 
             return true;
@@ -111,7 +112,7 @@ namespace CeresMaize_Console_CS
         {
             if (!CCoin.GetInstance().processCoin(CCoinState.Irrigation))	//必须确保钱够才可以继续
                 return false;
-            soilWater += water;
+            soilInfo.Water += water;
 
             if (crop is IExpandIrrigation)
             {
@@ -123,13 +124,13 @@ namespace CeresMaize_Console_CS
             return true;
         }
 
-        public bool Fertilizer(int n, int p, int k)
+        public bool Fertilizer(float n, float p, float k)
         {
             if (!CCoin.GetInstance().processCoin(CCoinState.Fertilizer))	//必须确保钱够才可以继续
                 return false;
-            soilN += n;
-            soilP += p;
-            soilK += k;
+            soilInfo.N += n;
+            soilInfo.P += p;
+            soilInfo.K += k;
 
             if (crop is IExpandFertilizer)
             {
@@ -143,7 +144,7 @@ namespace CeresMaize_Console_CS
 
         public CSoilInfo GetSoilInfo()
         {
-            return new CSoilInfo(soilWater, soilN, soilP, soilK);
+            return soilInfo;
         }
 
         public CCropState GetState()
@@ -164,6 +165,12 @@ namespace CeresMaize_Console_CS
             if (crop != null)
             {
                 crop.DailyUpdate();
+            }
+
+            if (soilInfo != null)
+            {
+                soilInfo.DailyUpdateEffect();
+                soilInfo.DailyUpdatePunishment();
             }
         }
 
