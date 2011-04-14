@@ -24,13 +24,14 @@ namespace CeresMaize_Console_CS
 
         void initByType(CSeedType type)
         {
-            switch(type)
+            switch (type)
             {
                 case CSeedType.Maize_Normal:
                     {
-
-                des = "玉米种子";
+                        des = "玉米种子";
+                        break;
                     }
+            }
         }
     }
 }

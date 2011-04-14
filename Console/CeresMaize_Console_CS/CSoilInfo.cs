@@ -15,9 +15,6 @@ namespace CeresMaize_Console_CS
         public float K;                   //土壤含钾量
 
         //private float cropFactor;        //作物系数
-        public int cropQualityLimit;    //农作物质量下限
-        public int cropNumberLimit;     //农作物数量下限
-
         private float[] punishmentRecord = new float[5];        //记录惩罚措施里累计的时间
 
         private float[,] SoilInfoPunish = new float[5, 8];     //惩罚的相关信息
@@ -82,6 +79,14 @@ namespace CeresMaize_Console_CS
         }
 
         /// <summary>
+        ///  依据土壤情况刷新农田状态
+        /// </summary>
+        public void DailyUpdateState()
+        {
+            
+        }
+
+        /// <summary>
         /// 外界因素每日对土壤的影响
         /// </summary>
         /// <param name="farm">被影响的农田</param>
@@ -107,9 +112,22 @@ namespace CeresMaize_Console_CS
         public void DailyUpdatePunishment()
         {
             // 依据土壤状态，进行相应惩罚
+            if (farm.inWeed)
+            {
+                farm.crop.cropQuality -= SoilInfoPunish[2, 4];
+                farm.crop.cropNumber -= SoilInfoPunish[2, 5];
+            }
 
-             for (int i = 0; i < 5; i++)     //处罚累计时间自加
-                punishmentRecord[i]++;
+
+            //处罚累计时间自加
+            // 营养不足处理
+            if (farm.inPoor)
+                punishmentRecord[3]++;
+            if (punishmentRecord[3] >= SoilInfoPunish[3,6])  // 累计X天后
+            {
+                farm.crop.cropQuality -= SoilInfoPunish[3, 4];
+                farm.crop.cropNumber -= SoilInfoPunish[3, 5];
+            }
         }
 
         /// <summary>

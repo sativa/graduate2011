@@ -11,6 +11,12 @@ namespace CeresMaize_Console_CS
         public CFarm farm;
         public string cropName;
 
+        public float cropQuality;     // 农作物质量
+        public float cropNumber;    // 农作物数量
+
+        public float cropQualityLimit;      // 农作物质量下限
+        public float cropNumberLimit;     // 农作物数量下限
+
         public CCrop(CFarm thisFarm)
         {
             farm = thisFarm;

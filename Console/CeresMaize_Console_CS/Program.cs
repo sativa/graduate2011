@@ -19,10 +19,13 @@ namespace CeresMaize_Console_CS
             farm.Irrigation();
             farm.Fertilizer(CFertilizer.Fertilizer_Com);
             farm.Assart();
-            farm.Seminate(new CSeed("MaizeSeed"));
+            farm.Seminate(new CSeed(CSeedType.Maize_Normal));
 
             farm.KillWeed();
             farm.inWeed = true;
+            farm.inPoor = true;
+
+            farm.DailyUpdate();
             farm.KillWeed();
                         
             farm.stateGUI.Show(farm.crop.Predict());
@@ -36,8 +39,7 @@ namespace CeresMaize_Console_CS
                 if (i%100 == 0)
                     continue;
             }
-            gui.ButtonReap();
-
+            farm.Reap();
 
             for (int i = 0; i < CGameInfo.GetInstance().GetInfoLength(); i++)
             {

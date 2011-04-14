@@ -11,7 +11,7 @@ namespace CeresMaize_Console_CS
         static public void PlantCrop(CFarm farm,CSeed seed)
         {
             // Factroy Method
-            if (seed.type == "MaizeSeed")
+            if (seed.type == CSeedType.Maize_Normal)
             {
                 // Build CropStateGUI
                 CMaizeStateGUI maizeGUI = new CMaizeStateGUI(farm);
@@ -32,6 +32,10 @@ namespace CeresMaize_Console_CS
                 // tag SemiInfo
                 //maizeLogic.ISOW = Control_Time.dt.DayOfYear;
                 maizeLogic.ISOW = 100;
+
+                // 质量和数量
+                maizeLogic.cropQuality = 100;
+                maizeLogic.cropNumber = 30;
             }
         }
     }
