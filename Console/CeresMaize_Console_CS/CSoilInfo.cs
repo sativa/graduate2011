@@ -22,7 +22,7 @@ namespace CeresMaize_Console_CS
 
         private float[,] SoilInfoPunish = new float[5, 8];     //惩罚的相关信息
         private int[,] SoilInfoInit = new int[2, 4];            //需要将土壤成分设置为***的相关信息
-        private float[,] SoilInfoChange = new float[6, 4];     //操作改变土壤的相关信息
+        private float[,] SoilInfoChange = new float[9, 4];     //操作改变土壤的相关信息
 
         private CFarm farm;  //  农田的引用
 
@@ -71,7 +71,7 @@ namespace CeresMaize_Console_CS
             //从文件操作改变土壤相关数据
             //
             lines = File.ReadAllLines("SoilInfoChange.txt");
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < 9; i++)
             {
                 sp = lines[i + 1].Split('\t');
                 for (j = 0; j < 4; j++)
@@ -106,7 +106,7 @@ namespace CeresMaize_Console_CS
         /// <param name="farm">该农田的农作物被惩罚</param>
         public void DailyUpdatePunishment()
         {
-            // 
+            // 依据土壤状态，进行相应惩罚
 
              for (int i = 0; i < 5; i++)     //处罚累计时间自加
                 punishmentRecord[i]++;

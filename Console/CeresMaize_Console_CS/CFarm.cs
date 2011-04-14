@@ -17,6 +17,7 @@ namespace CeresMaize_Console_CS
         public bool isAssart = false;         // 因测试需要才设定public，在U3D中将测试
         public bool isSeminate = false;    // 因测试需要才设定public，在U3D中将测试
         public bool isReap = false;    // 因测试需要才设定public，在U3D中将测试
+        public bool inWeed = false;    // 因测试需要才设定public，在U3D中将测试
 
         // 修改下面的4个值会影响系统计算，在InitIrrigation和InitFertilizer中会自动调用
         public CSoilInfo soilInfo;
@@ -108,46 +109,91 @@ namespace CeresMaize_Console_CS
 
         }
 
-        public bool Irrigation(int water)
+        public bool Irrigation()
         {
             if (!CCoin.GetInstance().processCoin(CCoinState.Irrigation))	//必须确保钱够才可以继续
                 return false;
-            soilInfo.Water += water;
+
+            float water= soilInfo.Water;
+
+            // 由SoilInfoChange指定修改土壤数据
+            soilInfo.ChangeSoilInfo(0);
 
             if (crop is IExpandIrrigation)
             {
-                ((IExpandIrrigation)crop).DoIrrigation(water);
+                ((IExpandIrrigation)crop).DoIrrigation(soilInfo.Water - water);
             }
 
-            CGameInfo.GetInstance().AddInfo(farmName + "完成灌溉,灌溉量是" + water + "方水");
+            CGameInfo.GetInstance().AddInfo(farmName + "完成灌溉,灌溉量是" + (soilInfo.Water-water) + "方水");
 
             return true;
         }
 
-        public bool Fertilizer(float n, float p, float k)
+        public bool Fertilizer(CFertilizer fertilizer)
         {
             if (!CCoin.GetInstance().processCoin(CCoinState.Fertilizer))	//必须确保钱够才可以继续
                 return false;
-            soilInfo.N += n;
-            soilInfo.P += p;
-            soilInfo.K += k;
+
+            //soilInfo.N += n;
+            //soilInfo.P += p;
+            //soilInfo.K += k;
+                       
+            // 保存施肥前的数据
+            float n, p, k;
+            n = soilInfo.N;
+            p = soilInfo.P;
+            k = soilInfo.K;
+
+            // 由SoilInfoChange指定修改土壤数据
+            switch (fertilizer)
+            {
+                case CFertilizer.Fertilizer_N:
+                    soilInfo.ChangeSoilInfo(6);
+                    break;
+                case CFertilizer.Fertilizer_P:
+                    soilInfo.ChangeSoilInfo(7);
+                    break;
+                case CFertilizer.Fertilizer_K:
+                    soilInfo.ChangeSoilInfo(8);
+                    break;
+                case CFertilizer.Fertilizer_Com:
+                    soilInfo.ChangeSoilInfo(3);
+                    break;
+            }
 
             if (crop is IExpandFertilizer)
             {
-                ((IExpandFertilizer)crop).DoFertilizer(n, p, k);
+                ((IExpandFertilizer)crop).DoFertilizer(soilInfo.N - n, soilInfo.P - p, soilInfo.K-k);
             }
 
-            CGameInfo.GetInstance().AddInfo(farmName + "完成施肥,有效施肥量是" + n + "公斤氮," + p + "公斤磷," + k + "公斤钾");
+            CGameInfo.GetInstance().AddInfo(farmName + "完成施肥,有效施肥量是" + (soilInfo.N - n) + "公斤氮," + (soilInfo.P - p) + "公斤磷," + (soilInfo.K - k) + "公斤钾");
 
             return true;
         }
+
+        public bool KillWeed()
+        {
+            if (!inWeed)
+            {
+                CGameInfo.GetInstance().AddInfo(farmName + "没有发生草害，不用除草");
+                return false;
+            }
+
+            if (!CCoin.GetInstance().processCoin(CCoinState.Weed))	//必须确保钱够才可以继续
+                return false;
+
+            CGameInfo.GetInstance().AddInfo(farmName + "完成除草操作");
+
+            return true;
+        }
+
 
         public CSoilInfo GetSoilInfo()
         {
             return soilInfo;
         }
 
-        public CCropState GetState()
+        public CCropState GetCropState()
         {
             // Farm State
 

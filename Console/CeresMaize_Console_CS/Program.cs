@@ -16,22 +16,23 @@ namespace CeresMaize_Console_CS
             CFarmGUI gui = new CFarmGUI(farm);
             CMoney.GetInstance().Add(100);
 
-            gui.ButtonIrrigation(40);
-            gui.ButtonFertilizer(2, 1, 3);
-            gui.ButtonAssart();
-            gui.ButtonSeminate(new CSeed("MaizeSeed"));
+            farm.Irrigation();
+            farm.Fertilizer(CFertilizer.Fertilizer_Com);
+            farm.Assart();
+            farm.Seminate(new CSeed("MaizeSeed"));
 
-            //gui.ButtonIrrigation(40);
-            
-            
+            farm.KillWeed();
+            farm.inWeed = true;
+            farm.KillWeed();
+                        
             farm.stateGUI.Show(farm.crop.Predict());
 
-            gui.ButtonIrrigation(10);
+            farm.Irrigation();
             for (int i = 0; i <200; i++)
             {
                 farm.DailyUpdate();
                 CTerrain.GetInstance().dt = CTerrain.GetInstance().dt.AddDays(1);
-                //farm.stateGUI.Show(farm.GetState());
+                //farm.stateGUI.Show(farm.GetCropState());
                 if (i%100 == 0)
                     continue;
             }

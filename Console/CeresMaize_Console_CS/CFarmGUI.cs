@@ -31,14 +31,14 @@ namespace CeresMaize_Console_CS
             farm.Reap();
         }
 
-        public void ButtonIrrigation(int water)
+        public void ButtonIrrigation()
         {
-            farm.Irrigation(water);
+            farm.Irrigation();
         }
 
-        public void ButtonFertilizer(int n,int p,int k)
+        public void ButtonFertilizer(CFertilizer fer)
         {
-            farm.Fertilizer(n,p,k);
+            farm.Fertilizer(fer);
         }
     }
 

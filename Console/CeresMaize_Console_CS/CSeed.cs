@@ -5,25 +5,32 @@ using System.Text;
 
 namespace CeresMaize_Console_CS
 {
+    public enum CSeedType
+    {
+        Maize_Normal,
+        Maize_High
+    }
     public class CSeed
     {
-        public string type; // 种类，目前仅实现了MaizeSeed
+        public CSeedType type; // 种类，目前仅实现了MaizeSeed
         public string des;
-        
-        public CSeed(string thisType)
+
+        public CSeed(CSeedType thisType)
         {
             type = thisType;
-
             initByType(type);
 
         }
 
-        void initByType(string type)
+        void initByType(CSeedType type)
         {
-            if (type == "MaizeSeed")
+            switch(type)
             {
+                case CSeedType.Maize_Normal:
+                    {
+
                 des = "玉米种子";
-            }
+                    }
         }
     }
 }
