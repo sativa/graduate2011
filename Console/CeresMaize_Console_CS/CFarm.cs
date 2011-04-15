@@ -185,6 +185,14 @@ namespace CeresMaize_Console_CS
             return true;
         }
 
+        /// <summary>
+        /// 依据条件，刷新农场状态，如杂草、虫害、干涸等爆发
+        /// </summary>
+        public void DailyUpdateFarm()
+        {
+
+        }
+
 
         public CSoilInfo GetSoilInfo()
         {
@@ -206,6 +214,8 @@ namespace CeresMaize_Console_CS
 
         public void DailyUpdate()
         {
+            DailyUpdateFarm();  // 农田刷新自己
+
             if (crop != null)
             {
                 crop.DailyUpdate();
@@ -213,7 +223,6 @@ namespace CeresMaize_Console_CS
 
             if (soilInfo != null)
             {
-                soilInfo.DailyUpdateState();
                 soilInfo.DailyUpdateEffect();
                 soilInfo.DailyUpdatePunishment();
             }

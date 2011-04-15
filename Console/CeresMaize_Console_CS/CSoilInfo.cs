@@ -9,6 +9,8 @@ namespace CeresMaize_Console_CS
 {
     public class CSoilInfo
     {
+        public CFarm farm;  //  农田的引用
+
         public float Water;               //土壤含水量
         public float N;                   //土壤含氮量
         public float P;                   //土壤含磷量
@@ -16,12 +18,9 @@ namespace CeresMaize_Console_CS
 
         //private float cropFactor;        //作物系数
         private float[] punishmentRecord = new float[5];        //记录惩罚措施里累计的时间
-
         private float[,] SoilInfoPunish = new float[5, 8];     //惩罚的相关信息
         private int[,] SoilInfoInit = new int[2, 4];            //需要将土壤成分设置为***的相关信息
         private float[,] SoilInfoChange = new float[9, 4];     //操作改变土壤的相关信息
-
-        private CFarm farm;  //  农田的引用
 
         //无参数的构造函数
         public CSoilInfo(CFarm thisFarm)
@@ -79,17 +78,8 @@ namespace CeresMaize_Console_CS
         }
 
         /// <summary>
-        ///  依据土壤情况刷新农田状态
+        /// 环境因素对土壤的影响
         /// </summary>
-        public void DailyUpdateState()
-        {
-            
-        }
-
-        /// <summary>
-        /// 外界因素每日对土壤的影响
-        /// </summary>
-        /// <param name="farm">被影响的农田</param>
         public void DailyUpdateEffect()
         {
             //
