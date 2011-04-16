@@ -44,7 +44,7 @@ namespace CeresMaize_Console_CS
             farm.HandleWeed();
             CGameInfo.GetInstance().AddInfo("除草后金钱:" + CCoin.GetInstance().getCoin());
 
-            CGameInfo.GetInstance().AddInfo("预测结果:" + farm.Predict().ToString());
+            CGameInfo.GetInstance().AddInfo("预测结果:" + farm.Predict());
 
             farm.HandleWeed();
             CGameInfo.GetInstance().AddInfo("除草后金钱:" + CCoin.GetInstance().getCoin());

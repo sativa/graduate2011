@@ -215,22 +215,19 @@ namespace CeresMaize_Console_CS
         ///  预测操作
         /// </summary>
         /// <returns>是否成功</returns>
-        public bool Predict()
+        public CCropState Predict()
         {
             if (crop == null)
             {
                 CGameInfo.GetInstance().AddInfo(farmName+"上没有种植任何作物");
-                return false;
+                return null;
             }
 
             CCropState result= crop.Predict();
             if (result== null)
-                return false;
+                return null;
 
-            // TODO：Open GUI 显示预测结果
-            CGameInfo.GetInstance().AddInfo("预测:"+crop.Predict());
-
-            return true;
+            return result;
         }
 
         /// <summary>
