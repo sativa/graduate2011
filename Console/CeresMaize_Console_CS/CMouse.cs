@@ -7,19 +7,6 @@ namespace CeresMaize_Console_CS
         CMouseState state;
         object obj;
     };
-    public enum CMouseState
-    {
-        None,
-        GameInfo,
-        Assart,
-        Seminate,
-        Reap,
-        Irrigation,
-        Fertilizer,
-        Weed,
-        Pet,
-        Disease
-
-    };
+    
 
 }

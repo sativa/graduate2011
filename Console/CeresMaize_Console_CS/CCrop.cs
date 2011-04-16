@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace CeresMaize_Console_CS
@@ -32,8 +31,10 @@ namespace CeresMaize_Console_CS
 
         }
 
-
         abstract public void DailyUpdate();
+
+        abstract public bool IsReap();
+
         abstract public CCrop Clone();   // 克隆
         abstract public CCropState Predict();
 

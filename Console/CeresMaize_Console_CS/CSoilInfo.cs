@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using System.IO;
@@ -104,8 +103,11 @@ namespace CeresMaize_Console_CS
             // 依据土壤状态，进行相应惩罚
             if (farm.inWeed)
             {
-                farm.crop.cropQuality -= SoilInfoPunish[2, 4];
-                farm.crop.cropNumber -= SoilInfoPunish[2, 5];
+                if (farm.crop != null)
+                {
+                    farm.crop.cropQuality -= SoilInfoPunish[2, 4];
+                    farm.crop.cropNumber -= SoilInfoPunish[2, 5];
+                }
             }
 
 
@@ -113,10 +115,13 @@ namespace CeresMaize_Console_CS
             // 营养不足处理
             if (farm.inPoor)
                 punishmentRecord[3]++;
-            if (punishmentRecord[3] >= SoilInfoPunish[3,6])  // 累计X天后
+            if (punishmentRecord[3] >= SoilInfoPunish[3, 6])  // 累计X天后
             {
-                farm.crop.cropQuality -= SoilInfoPunish[3, 4];
-                farm.crop.cropNumber -= SoilInfoPunish[3, 5];
+                if (farm.crop != null)
+                {
+                    farm.crop.cropQuality -= SoilInfoPunish[3, 4];
+                    farm.crop.cropNumber -= SoilInfoPunish[3, 5];
+                }
             }
         }
 
@@ -154,6 +159,14 @@ namespace CeresMaize_Console_CS
                 P = 0;
             if (K < 0)
                 K = 0;
+        }
+
+        public override string ToString()
+        {
+            return "水分:" + Water.ToString()
+                + " N:" + N.ToString() + ","
+                + " P:" + P.ToString() + ","
+                + " K:" + K.ToString();
         }
     }
 

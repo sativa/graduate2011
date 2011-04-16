@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace CeresMaize_Console_CS
@@ -17,9 +16,10 @@ namespace CeresMaize_Console_CS
         public bool isAssart = false;         // 因测试需要才设定public，在U3D中将测试
         public bool isSeminate = false;    // 因测试需要才设定public，在U3D中将测试
         public bool isReap = false;    // 因测试需要才设定public，在U3D中将测试
-        public bool inWeed = false;    // 因测试需要才设定public，在U3D中将测试
-        public bool inPet = false;          // 因测试需要才设定public，在U3D中将测试
-        public bool inPoor = false;         // 因测试需要才设定public，在U3D中将测试
+        public bool inWeed = false;    // 杂草 // 因测试需要才设定public，在U3D中将测试
+        public bool inPet = false;        // 虫害  // 因测试需要才设定public，在U3D中将测试
+        public bool inPoor = false;      // 缺少营养   // 因测试需要才设定public，在U3D中将测试
+        public bool inDry = false;      // 缺水   // 因测试需要才设定public，在U3D中将测试
 
         // 修改下面的4个值会影响系统计算，在InitIrrigation和InitFertilizer中会自动调用
         public CSoilInfo soilInfo;     
@@ -61,12 +61,13 @@ namespace CeresMaize_Console_CS
 
             if (isAssart)
             {
-                if (!CCoin.GetInstance().processCoin(CCoinState.Seminate))	//必须确保钱够才可以继续
+                if (!CCoin.GetInstance().processCoin(CCoinState.Seminate))	 //必须确保钱够才可以继续
                     return false;
+
                 CFarmFactroy.PlantCrop(this, seed);
                 CGameInfo.GetInstance().AddInfo(farmName + "完成播种,种子是" + seed.des);
+
                 isSeminate = true;
-                isReap = true;	//设置农田为可收割状态
             }
             else
             {
@@ -77,8 +78,25 @@ namespace CeresMaize_Console_CS
             return true;
         }
 
+        /// <summary>
+        /// 农田是否收割，由作物成熟决定
+        /// </summary>
+        /// <returns>能否收割</returns>
+        private bool IsReap()
+        {
+            if (crop == null)
+                return false;
+            return crop.IsReap();
+        }
+
+        /// <summary>
+        /// 农田收割操作
+        /// </summary>
+        /// <returns>能否执行</returns>
         public bool Reap()
         {
+            isReap = IsReap();
+
             if (!isAssart || !isSeminate)
             {
                 CGameInfo.GetInstance().AddInfo(farmName + "无法收割,因为农田没有播种");
@@ -86,7 +104,7 @@ namespace CeresMaize_Console_CS
             }
             else if (!isReap)
             {
-                CGameInfo.GetInstance().AddInfo(farmName + "无法重复收割");
+                CGameInfo.GetInstance().AddInfo(farmName + "无法收割,因为作物没有成熟");
                 return false;
             }
             else
@@ -97,6 +115,9 @@ namespace CeresMaize_Console_CS
                 isAssart = false;
                 isSeminate = false;
                 isReap = false;
+
+                // TODO:此时虫害是否消失？
+                inPet = false;
 
                 CGameInfo.GetInstance().AddInfo(farmName + "完成收割");
                 if (!CCoin.GetInstance().processCoin(CCoinState.Reap))	//处理获得的钱
@@ -169,7 +190,11 @@ namespace CeresMaize_Console_CS
             return true;
         }
 
-        public bool KillWeed()
+        /// <summary>
+        /// 除草操作
+        /// </summary>
+        /// <returns>是否成功</returns>
+        public bool HandleWeed()
         {
             if (!inWeed)
             {
@@ -181,6 +206,29 @@ namespace CeresMaize_Console_CS
                 return false;
 
             CGameInfo.GetInstance().AddInfo(farmName + "完成除草操作");
+            inWeed = false;
+
+            return true;
+        }
+
+        /// <summary>
+        ///  预测操作
+        /// </summary>
+        /// <returns>是否成功</returns>
+        public bool Predict()
+        {
+            if (crop == null)
+            {
+                CGameInfo.GetInstance().AddInfo(farmName+"上没有种植任何作物");
+                return false;
+            }
+
+            CCropState result= crop.Predict();
+            if (result== null)
+                return false;
+
+            // TODO：Open GUI 显示预测结果
+            CGameInfo.GetInstance().AddInfo("预测:"+crop.Predict());
 
             return true;
         }
@@ -193,7 +241,6 @@ namespace CeresMaize_Console_CS
 
         }
 
-
         public CSoilInfo GetSoilInfo()
         {
             return soilInfo;
@@ -201,8 +248,6 @@ namespace CeresMaize_Console_CS
 
         public CCropState GetCropState()
         {
-            // Farm State
-
             // Crop State
             if (crop != null)
             {
@@ -227,8 +272,5 @@ namespace CeresMaize_Console_CS
                 soilInfo.DailyUpdatePunishment();
             }
         }
-
     }
-
-
 }

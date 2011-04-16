@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Collections;
 namespace CeresMaize_Console_CS
 {
+
+
     //singlton
     public class CCoin
     {
@@ -139,16 +140,5 @@ namespace CeresMaize_Console_CS
         }
     }
 
-    //ÐèÒª¿ÛÇ®µÄ×´Ì¬
-    public enum CCoinState
-    {
-        None,		//ÎÞ×´Ì¬
-        Assart,		//¿ª¿Ñ
-        Seminate,	//²¥ÖÖ
-        Reap,			//ÊÕ»ñ
-        Irrigation,	//¹à¸È
-        Fertilizer,	//Ê©·Ê
-        Weed,		//³ý²Ý
-        Disease		//²¡³æº¦
-    }
+    
 };

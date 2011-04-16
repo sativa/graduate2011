@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace CeresMaize_Console_CS
@@ -8,7 +7,7 @@ namespace CeresMaize_Console_CS
     // 玉米科学模型，实现了CCrop操作
     public class CeresMaize_Logic : CCrop, IExpandFertilizer, IExpandIrrigation
     {
-        public string cropName = "玉米";
+        //public string cropName = "玉米";
         private float coeIrrigation = 1;     // coeffient Water
         private float coeFertilizer = 1; // coeffient Fertilizer
 
@@ -199,17 +198,36 @@ namespace CeresMaize_Console_CS
 
         }
 
+        override public bool IsReap()
+        {
+            if (this.ISTAGE == 6 || ISTAGE == 0)
+                return true;
+
+            return false;
+        }
+
         // 产量预测，使用当前对象进行克隆，然后进行预测
         override public CCropState Predict()
         {
-            coeIrrigation = CalIrrigation();  // Must Implement InitIrrigation() first , Init at Constructer 
-            coeFertilizer = CalFertilizer();   // Must Implement InitFertilizer() first , Init at Constructer 
+            // 当作物已经成熟，不能再预测
 
+            if (this.ISTAGE == 6 || ISTAGE == 0)
+            {
+                CGameInfo.GetInstance().AddInfo(farm.farmName + "上的作物已经成熟,无法预测");
+                return null;
+            }
+
+            // 预测迭代计算
             CeresMaize_Logic maizeClone = (CeresMaize_Logic)Clone();
             while (maizeClone.ISTAGE != 6)
             {
+                // 使用真实的计算过程，预测准确
+                //maizeClone.DailyUpdate();
+                // 使用当前的灌溉与施肥数据进行预测，造成预测不准确
                 maizeClone.Routine();
             }
+
+            // 返回预测结果
             CMaizeState maizeState = new CMaizeState(maizeClone);
             return maizeState;
         }
@@ -346,7 +364,7 @@ namespace CeresMaize_Console_CS
         public CeresMaize_Logic(CFarm farm)
             : base(farm)
         {
-            //cropName = "玉米";
+            base.cropName = "玉米";
 
             // test data
             // line 1

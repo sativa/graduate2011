@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace CeresMaize_Console_CS
@@ -55,13 +54,13 @@ namespace CeresMaize_Console_CS
         public override string ToString()
         {
             return "No."+NDAS.ToString()
-                + " 生物量：" + BIOMAS.ToString() + ","
-                + " 生长阶段：" + ISTAGE.ToString() + ","
-                + " 谷粒重：" + GRNWT.ToString() + ","
-                + " 根重：" + RTWT.ToString() + ","
-                + " 茎重：" + STMWT.ToString() + ","
-                + " 叶重：" + LFWT.ToString() + ","
-                + " 穗重：" + EARWT.ToString();
+                + " 生物量:" + BIOMAS.ToString() + ","
+                + " 生长阶段:" + ISTAGE.ToString() + ","
+                + " 谷粒重:" + GRNWT.ToString() + ","
+                + " 根重:" + RTWT.ToString() + ","
+                + " 茎重:" + STMWT.ToString() + ","
+                + " 叶重:" + LFWT.ToString() + ","
+                + " 穗重:" + EARWT.ToString();
 
              
         }

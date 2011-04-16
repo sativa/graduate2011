@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace CeresMaize_Console_CS
@@ -12,47 +11,68 @@ namespace CeresMaize_Console_CS
         {
             CTerrain.GetInstance().Init("1.terrain");
 
-            CFarm farm = new CFarm("农田");
+            CFarm farm = new CFarm("农田1");
             CFarmGUI gui = new CFarmGUI(farm);
-            CMoney.GetInstance().Add(100);
+
+            CGameInfo.GetInstance().AddInfo("初始的金钱:"+CCoin.GetInstance().getCoin());
+
+            farm.Assart();
+            CGameInfo.GetInstance().AddInfo("开垦后金钱:" + CCoin.GetInstance().getCoin());
 
             farm.Irrigation();
-            farm.Fertilizer(CFertilizer.Fertilizer_Com);
-            farm.Assart();
-            farm.Seminate(new CSeed(CSeedType.Maize_Normal));
+            CGameInfo.GetInstance().AddInfo("灌溉后金钱:" + CCoin.GetInstance().getCoin());
 
-            farm.KillWeed();
+            farm.Fertilizer(CFertilizer.Fertilizer_Com);
+            CGameInfo.GetInstance().AddInfo("施肥后金钱:" + CCoin.GetInstance().getCoin());
+
+            farm.Seminate(new CSeed(CSeedType.Maize_Normal));
+            CGameInfo.GetInstance().AddInfo("播种后金钱:" + CCoin.GetInstance().getCoin());
+
+            farm.HandleWeed();
+            CGameInfo.GetInstance().AddInfo("除草后金钱:" + CCoin.GetInstance().getCoin());
+
             farm.inWeed = true;
             farm.inPoor = true;
 
-            farm.DailyUpdate();
-            farm.KillWeed();
-                        
-            farm.stateGUI.Show(farm.crop.Predict());
+            //farm.Reap();
+            CGameInfo.GetInstance().AddInfo("收割后金钱:" + CCoin.GetInstance().getCoin());
 
-            farm.Irrigation();
+
+            farm.DailyUpdate();
+            CGameInfo.GetInstance().AddInfo("土壤:"+farm.GetSoilInfo().ToString());
+
+            farm.HandleWeed();
+            CGameInfo.GetInstance().AddInfo("除草后金钱:" + CCoin.GetInstance().getCoin());
+
+            CGameInfo.GetInstance().AddInfo("预测结果:" + farm.Predict().ToString());
+
+            farm.HandleWeed();
+            CGameInfo.GetInstance().AddInfo("除草后金钱:" + CCoin.GetInstance().getCoin());
+
+            // 模拟生长
             for (int i = 0; i <200; i++)
             {
                 farm.DailyUpdate();
                 CTerrain.GetInstance().dt = CTerrain.GetInstance().dt.AddDays(1);
-                //farm.stateGUI.Show(farm.GetCropState());
+                //CGameInfo.GetInstance().AddInfo("土壤:"+farm.GetSoilInfo());
+                //CGameInfo.GetInstance().AddInfo("作物:"+farm.GetCropState());
                 if (i%100 == 0)
                     continue;
             }
-            farm.Reap();
+            CGameInfo.GetInstance().AddInfo("预测结果:" + farm.Predict());
 
+            farm.Reap();
+            CGameInfo.GetInstance().AddInfo("收割后金钱:" + CCoin.GetInstance().getCoin());
+            
+            CGameInfo.GetInstance().AddInfo("最终的金钱:" + CCoin.GetInstance().getCoin());
+
+
+
+            // 输出所有结果
             for (int i = 0; i < CGameInfo.GetInstance().GetInfoLength(); i++)
             {
-                System.Console.Out.WriteLine(CGameInfo.GetInstance().GetInfoAt(i));
+                Console.Out.WriteLine(CGameInfo.GetInstance().GetInfoAt(i));
             }
-            /*
-            ClassContain oth = new ClassContain(new ClassB());
-            oth.Test();
-            oth.SetInter(new ClassA());
-            oth.Test();
-            */
-            System.Console.Out.WriteLine(CMoney.GetInstance().GetMoney());
-            
             System.Console.Read();
         }
     }
