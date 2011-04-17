@@ -33,6 +33,7 @@ Animation：骨骼动画控件，放在unity面板上，在脚本中获取它并用它播放骨骼动画，脚本
 AnimationClip：骨骼动画片段，在unity中对美工做好的骨骼动画序列进行拆分得到
 _animation.CrossFade(loseBalanceAnimation.name);	//播放失衡动画
 _animation[jumpPoseAnimation.name].speed;		//修改某个动画片段的播放速度
+_animation[loseBalanceAnimation.name].layer = 2		//设置失衡动画的层，可以同时和其他动画一起播
 
 常用事件：
 function OnCollisionEnter(collision : Collision) {}	//进入碰撞区域
