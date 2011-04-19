@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
 
     // 农田类，记录农田中的作物和使用的GUI
     // CCropStateGUI为U3D的GUI，眼下只是模拟功能，以后将废弃
     public class CFarm
     {
+        public Mod_Farm farmMod=null;
         public CCrop crop = null;            // 当前种植的作物
         public CSeed lastCrop = null;      // 上次种植的作物，用于进行播种惩罚
 
@@ -26,9 +26,10 @@ namespace CeresMaize_Console_CS
 
         public CSoilInfo soilInfo;     // 土壤 
 
-        public CFarm(string name)
+        public CFarm(string name,Mod_Farm mod)
         {
             farmName = name;
+            farmMod = mod;
 
             soilInfo = new CSoilInfo(this);
             soilInfo.InitSoliInfo(0);
@@ -50,6 +51,9 @@ namespace CeresMaize_Console_CS
 
             CGameInfo.GetInstance().AddInfo(farmName + "完成开垦");
             isAssart = true;
+
+            // 改变外观
+            farmMod.Switch(1);
 
             return true;
         }
@@ -75,7 +79,7 @@ namespace CeresMaize_Console_CS
             CGameInfo.GetInstance().AddInfo(farmName + "完成播种,种子是" + seed.des);
 
             // 播种惩罚
-            if (CTerrain.GetInstance().season != seed.season)
+            if (Control_Time.season != seed.season)
             {
                 crop.cropQuality -= 20;
             }
@@ -135,6 +139,8 @@ namespace CeresMaize_Console_CS
                     return false;
             }
 
+            farmMod.Switch(0);
+
             return true;
 
         }
@@ -156,6 +162,12 @@ namespace CeresMaize_Console_CS
 
             CGameInfo.GetInstance().AddInfo(farmName + "完成灌溉,灌溉量是" + (soilInfo.Water-water) + "方水");
 
+            if (inDry && soilInfo.Water > 20)
+            {
+                inDry = false;
+                CGameInfo.GetInstance().AddInfo(farmName + "因灌溉已不再干旱");
+            }
+
             return true;
         }
 
@@ -167,7 +179,7 @@ namespace CeresMaize_Console_CS
             //soilInfo.N += n;
             //soilInfo.P += p;
             //soilInfo.K += k;
-                       
+
             // 保存施肥前的数据
             float n, p, k;
             n = soilInfo.N;
@@ -193,10 +205,16 @@ namespace CeresMaize_Console_CS
 
             if (crop is IExpandFertilizer)
             {
-                ((IExpandFertilizer)crop).DoFertilizer(soilInfo.N - n, soilInfo.P - p, soilInfo.K-k);
+                ((IExpandFertilizer)crop).DoFertilizer(soilInfo.N - n, soilInfo.P - p, soilInfo.K - k);
             }
 
             CGameInfo.GetInstance().AddInfo(farmName + "完成施肥,有效施肥量是" + (soilInfo.N - n) + "公斤氮," + (soilInfo.P - p) + "公斤磷," + (soilInfo.K - k) + "公斤钾");
+
+            if (soilInfo.N > 0 && soilInfo.P > 0 && soilInfo.K > 0)
+            {
+                inPoor = false;
+                CGameInfo.GetInstance().AddInfo(farmName + "因施肥已不再贫瘠");
+            }
 
             return true;
         }
@@ -243,7 +261,7 @@ namespace CeresMaize_Console_CS
             // 土壤数据修改
             soilInfo.ChangeSoilInfo(1);
 
-            CGameInfo.GetInstance().AddInfo(farmName + "完成除草操作");
+            CGameInfo.GetInstance().AddInfo(farmName + "完成除虫操作");
             inPet = false;
 
             return true;
@@ -276,36 +294,55 @@ namespace CeresMaize_Console_CS
         public void DailyUpdateFarm()
         {
             // 查看作物是否死亡
-            if (crop.cropQuality == 0)
+            if (crop != null && crop.cropQuality == 0)
             {
                 isDead = true;
             }
 
-            // 查看是否干涸
-            if (soilInfo.Water < 20)
-                inDry = true;
-            else
-                inDry = false;
+            // 判定是否干涸
+            if (!inDry)
+            {
+                if (soilInfo.Water < 20)
+                {
+                    inDry = true;
+                    CGameInfo.GetInstance().AddInfo(farmName + "因缺水已处于干涸状态");
+                }
+            }
 
             Random random = new Random();
             int value;
-            // 查看是否虫害
-            value = random.Next(0, 100);
-            if (value > 80)
-                inPet = true;
-
-            // 查看是否草害
-            value = random.Next(0, 100);
-            if (value < 20)
-                inWeed = true;
-
-            // 查看是否贫瘠
-            if (soilInfo.N == 0 || soilInfo.P == 0 || soilInfo.K == 0)
+            // 判定是否虫害
+            if (!inPet)
             {
-                inPoor = true;
+                value = random.Next(0, 100);
+                if (value > 80)
+                {
+                    inPet = true;
+                    CGameInfo.GetInstance().AddInfo(farmName + "发生了虫害,请尽快处理");
+                }
             }
-            else
-                inPoor = false;
+
+            // 判定是否草害
+            if (!inWeed)
+            {
+                value = random.Next(0, 100);
+                if (value < 20)
+                {
+                    inWeed = true;
+                    CGameInfo.GetInstance().AddInfo(farmName + "发生了草害,请尽快处理");
+                }
+            }
+
+            // 判定是否贫瘠
+            if (!inPoor)
+            {
+                if (soilInfo.N == 0 || soilInfo.P == 0 || soilInfo.K == 0)
+                {
+                    inPoor = true;
+                    CGameInfo.GetInstance().AddInfo(farmName + "因缺养分已处于贫瘠状态");
+                }
+            }
+
 
             // 查看作物是否成熟
             isReap = IsReap();
@@ -343,4 +380,4 @@ namespace CeresMaize_Console_CS
             }
         }
     }
-}
+

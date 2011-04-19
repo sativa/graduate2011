@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
     // Singlton
     public class CGameInfo
     {
@@ -19,6 +18,7 @@ namespace CeresMaize_Console_CS
         public void AddInfo(string str)
         {
             infoList.Add(str);
+            //GUI_GameMSG.scrollPosition.y += 1000;
         }
 
         public string GetInfoAt(int i)
@@ -31,4 +31,4 @@ namespace CeresMaize_Console_CS
             return infoList.Count;
         }
     }
-}
+

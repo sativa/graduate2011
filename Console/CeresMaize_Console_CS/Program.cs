@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
     class Program
     {
-
         static void Main(string[] args)
         {
             CTerrain.GetInstance().Init("1.terrain");
 
-            CFarm farm = new CFarm("农田1");
+            CFarm farm = new CFarm("农田1", new Mod_Farm());
             //farm.lastCrop = new CSeed(ESeedType.Maize_Normal);
             CFarmGUI gui = new CFarmGUI(farm);
 
@@ -62,7 +60,7 @@ namespace CeresMaize_Console_CS
             for (int i = 0; i <200; i++)
             {
                 farm.DailyUpdate();
-                CTerrain.GetInstance().dt = CTerrain.GetInstance().dt.AddDays(1);
+                Control_Time.dt = Control_Time.dt.AddDays(1);
                 CGameInfo.GetInstance().AddInfo("土壤:"+farm.GetSoilInfo());
                 //CGameInfo.GetInstance().AddInfo("作物:"+farm.GetCropState());
                 if (i == 100)
@@ -85,4 +83,4 @@ namespace CeresMaize_Console_CS
             System.Console.Read();
         }
     }
-}
+

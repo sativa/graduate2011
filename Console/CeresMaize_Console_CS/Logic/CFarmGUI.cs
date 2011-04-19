@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
     // 农田GUI，绑定在农田模型上
     // 为U3D的GUI，眼下只是模拟功能，以后将废弃
     class CFarmGUI
@@ -41,4 +40,3 @@ namespace CeresMaize_Console_CS
         }
     }
 
-}

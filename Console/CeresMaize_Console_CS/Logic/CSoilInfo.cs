@@ -4,8 +4,6 @@ using System.Text;
 
 using System.IO;
 
-namespace CeresMaize_Console_CS
-{
     public class CSoilInfo
     {
         public CFarm farm;  //  农田的引用
@@ -41,10 +39,10 @@ namespace CeresMaize_Console_CS
         private void DailyUpdateEffect()
         {
             // 每日土壤损失
-            Water -= CTerrain.GetInstance().SOLRAD[CTerrain.GetInstance().dt.DayOfYear - 1] / 200;
+            Water -= CTerrain.GetInstance().SOLRAD[Control_Time.dt.DayOfYear - 1] / 200;
 
-            if (CTerrain.GetInstance().TEMPMN[CTerrain.GetInstance().dt.DayOfYear - 1] + CTerrain.GetInstance().TEMPMX[CTerrain.GetInstance().dt.DayOfYear - 1]>20)
-                Water -= (CTerrain.GetInstance().TEMPMN[CTerrain.GetInstance().dt.DayOfYear - 1] + CTerrain.GetInstance().TEMPMX[CTerrain.GetInstance().dt.DayOfYear - 1] - 20) / 10;
+            if (CTerrain.GetInstance().TEMPMN[Control_Time.dt.DayOfYear - 1] + CTerrain.GetInstance().TEMPMX[Control_Time.dt.DayOfYear - 1] > 20)
+                Water -= (CTerrain.GetInstance().TEMPMN[Control_Time.dt.DayOfYear - 1] + CTerrain.GetInstance().TEMPMX[Control_Time.dt.DayOfYear - 1] - 20) / 10;
             //  每日土壤损失
             ChangeSoilInfo(4);
 
@@ -113,8 +111,9 @@ namespace CeresMaize_Console_CS
                 }
             }
 
-            if (farm.crop.cropQuality < 0)
-                farm.crop.cropQuality = 0;
+            if (farm.crop != null )
+                if(farm.crop.cropQuality < 0)
+                 farm.crop.cropQuality = 0;
 
         }
 
@@ -210,5 +209,5 @@ namespace CeresMaize_Console_CS
             }
         }
     }
-}
+
 

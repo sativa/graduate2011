@@ -5,16 +5,13 @@ using System.Text;
 using System.IO;
 
 // 完成地域信息的读取和创建
-namespace CeresMaize_Console_CS
-{
+
     // Singlton
     public class CTerrain
     {
         static private CTerrain instance=new CTerrain();
 
         // 应该刚才控制类里面
-        public DateTime dt = new DateTime(2011, 1, 1);
-        public ESeason season= ESeason.Spring;
 
         public int[] JDATE = new int[365];
         public float[] TEMPMX = new float[365];
@@ -48,4 +45,4 @@ namespace CeresMaize_Console_CS
         }
     }
 
-}
+

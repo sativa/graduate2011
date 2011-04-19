@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
     // 所有的枚举，写在该文件
 
     public enum ESeason
@@ -54,4 +53,4 @@ namespace CeresMaize_Console_CS
         Weed,		//除草
         Pet		//病虫害
     }
-}
+

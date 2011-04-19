@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
     // 工厂方法构造对象
     public class CFarmFactroy
     {
@@ -38,4 +37,4 @@ namespace CeresMaize_Console_CS
             }
         }
     }
-}
+

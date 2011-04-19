@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
     // 作物状态GUI，显示作物的状态信息
     // 为U3D的GUI，眼下只是模拟功能，以后将废弃
     abstract public class CCropStateGUI
@@ -32,4 +31,4 @@ namespace CeresMaize_Console_CS
             System.Console.WriteLine(state);
         }
     }
-}
+

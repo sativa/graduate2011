@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
-namespace CeresMaize_Console_CS
-{
 
 
     //singlton
@@ -141,4 +139,3 @@ namespace CeresMaize_Console_CS
     }
 
     
-};

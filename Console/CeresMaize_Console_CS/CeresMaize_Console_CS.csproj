@@ -36,22 +36,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CCoin.cs" />
-    <Compile Include="CCropState.cs" />
-    <Compile Include="CEnum.cs" />
-    <Compile Include="CeresMaize_Logic.cs" />
-    <Compile Include="CFarmFactroy.cs" />
-    <Compile Include="CFarmGUI.cs" />
-    <Compile Include="CGameInfo.cs" />
-    <Compile Include="Class.cs" />
-    <Compile Include="CFarm.cs" />
-    <Compile Include="CCrop.cs" />
-    <Compile Include="CMouse.cs" />
-    <Compile Include="CSeed.cs" />
-    <Compile Include="CCropStateGUI.cs" />
-    <Compile Include="CSoilInfo.cs" />
-    <Compile Include="CTerrain.cs" />
-    <Compile Include="Interface.cs" />
+    <Compile Include="Temp\Control_Game.cs" />
+    <Compile Include="Temp\Control_Time.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logic\CCoin.cs" />
+    <Compile Include="Logic\CCrop.cs" />
+    <Compile Include="Logic\CCropState.cs" />
+    <Compile Include="Logic\CCropStateGUI.cs" />
+    <Compile Include="Logic\CEnum.cs" />
+    <Compile Include="Logic\CeresMaize_Logic.cs" />
+    <Compile Include="Logic\CFarm.cs" />
+    <Compile Include="Logic\CFarmFactroy.cs" />
+    <Compile Include="Logic\CFarmGUI.cs" />
+    <Compile Include="Logic\CGameInfo.cs" />
+    <Compile Include="Logic\CMouse.cs" />
+    <Compile Include="Logic\CSeed.cs" />
+    <Compile Include="Logic\CSoilInfo.cs" />
+    <Compile Include="Logic\CTerrain.cs" />
+    <Compile Include="Temp\GUI_GameMSG.cs" />
+    <Compile Include="Temp\Mod_Farm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

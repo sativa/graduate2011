@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
     // 玉米科学模型，实现了CCrop操作
     public class CeresMaize_Logic : CCrop, IExpandFertilizer, IExpandIrrigation
     {
@@ -1133,4 +1132,4 @@ namespace CeresMaize_Console_CS
 
 
     }
-}
+

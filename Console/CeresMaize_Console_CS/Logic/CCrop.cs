@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
     // 作物抽象类，提供函数用于实现设计模式
     abstract public class CCrop
     {
@@ -55,4 +54,4 @@ namespace CeresMaize_Console_CS
         void InitFertilizer(); // 农田中的肥料
     }
     
-}
+

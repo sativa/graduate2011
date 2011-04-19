@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
+
     public class CCropState
     {
         public string cropName;
@@ -65,4 +64,4 @@ namespace CeresMaize_Console_CS
              
         }
     }
-}
+

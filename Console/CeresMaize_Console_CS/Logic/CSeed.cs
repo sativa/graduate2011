@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CeresMaize_Console_CS
-{
-
     public class CSeed
     {
         public ESeedType type; // 种类，目前仅实现了MaizeSeed
@@ -31,4 +28,4 @@ namespace CeresMaize_Console_CS
             }
         }
     }
-}
+
