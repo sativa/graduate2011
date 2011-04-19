@@ -90,6 +90,9 @@ using System.Text;
 
             lastCrop = seed;    // 标记上次种植的作物
             isSeminate = true;
+
+            farmMod.Switch(2);
+
             return true;
         }
 
@@ -110,8 +113,6 @@ using System.Text;
         /// <returns>能否执行</returns>
         public bool Reap()
         {
-            
-
             if (!isAssart || !isSeminate)
             {
                 CGameInfo.GetInstance().AddInfo(farmName + "无法收割,因为农田没有播种");
@@ -142,7 +143,6 @@ using System.Text;
             farmMod.Switch(0);
 
             return true;
-
         }
 
         public bool Irrigation()
@@ -166,6 +166,9 @@ using System.Text;
             {
                 inDry = false;
                 CGameInfo.GetInstance().AddInfo(farmName + "因灌溉已不再干旱");
+
+                farmMod.ResetSwith();
+
             }
 
             return true;
@@ -214,6 +217,8 @@ using System.Text;
             {
                 inPoor = false;
                 CGameInfo.GetInstance().AddInfo(farmName + "因施肥已不再贫瘠");
+
+                farmMod.ResetSwith();
             }
 
             return true;
@@ -240,6 +245,8 @@ using System.Text;
             CGameInfo.GetInstance().AddInfo(farmName + "完成除草操作");
             inWeed = false;
 
+            farmMod.ResetSwith();
+
             return true;
         }
 
@@ -263,6 +270,8 @@ using System.Text;
 
             CGameInfo.GetInstance().AddInfo(farmName + "完成除虫操作");
             inPet = false;
+
+            farmMod.ResetSwith();
 
             return true;
         }
@@ -306,6 +315,20 @@ using System.Text;
                 {
                     inDry = true;
                     CGameInfo.GetInstance().AddInfo(farmName + "因缺水已处于干涸状态");
+
+                    farmMod.Switch(4);
+                }
+            }
+
+            // 判定是否贫瘠
+            if (!inPoor)
+            {
+                if (soilInfo.N == 0 || soilInfo.P == 0 || soilInfo.K == 0)
+                {
+                    inPoor = true;
+                    CGameInfo.GetInstance().AddInfo(farmName + "因缺养分已处于贫瘠状态");
+                    
+                    farmMod.Switch(5);
                 }
             }
 
@@ -333,19 +356,13 @@ using System.Text;
                 }
             }
 
-            // 判定是否贫瘠
-            if (!inPoor)
-            {
-                if (soilInfo.N == 0 || soilInfo.P == 0 || soilInfo.K == 0)
-                {
-                    inPoor = true;
-                    CGameInfo.GetInstance().AddInfo(farmName + "因缺养分已处于贫瘠状态");
-                }
-            }
-
-
             // 查看作物是否成熟
-            isReap = IsReap();
+            if (!isReap)
+            {
+                isReap = IsReap();
+                if (isReap)
+                    farmMod.Switch(3);
+            }
 
         }
 
