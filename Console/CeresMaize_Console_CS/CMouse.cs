@@ -4,7 +4,7 @@ namespace CeresMaize_Console_CS
 {
     public struct CMouse
     {
-        CMouseState state;
+        EMouseState state;
         object obj;
     };
     

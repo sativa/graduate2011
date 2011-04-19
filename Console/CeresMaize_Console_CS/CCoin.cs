@@ -28,9 +28,9 @@ namespace CeresMaize_Console_CS
         }
 
         //处理钱的所有操作
-        public bool processCoin(CCoinState state)
+        public bool processCoin(ECoinState state)
         {
-            if (state == CCoinState.None)
+            if (state == ECoinState.None)
                 return false;
             else if (processSeed(state))				//种子
                 return true;
@@ -48,12 +48,12 @@ namespace CeresMaize_Console_CS
         }
 
         //买种子
-        bool processSeed(CCoinState state)
+        bool processSeed(ECoinState state)
         {
             //暂时只有玉米，以后复杂了和商店联系起来
             switch (state)
             {
-                case CCoinState.Seminate:
+                case ECoinState.Seminate:
                     return addOrMinusMoney(seedBuyPrice[0], false);
                 default:
                     return false;
@@ -61,19 +61,19 @@ namespace CeresMaize_Console_CS
         }
 
         //耕地除草等操作花费金币
-        bool processFarmOperation(CCoinState state)
+        bool processFarmOperation(ECoinState state)
         {
             switch (state)
             {
-                case CCoinState.Assart:
+                case ECoinState.Assart:
                     return addOrMinusMoney(farmOperation[0], false);
-                case CCoinState.Irrigation:
+                case ECoinState.Irrigation:
                     return addOrMinusMoney(farmOperation[1], false);
-                case CCoinState.Fertilizer:
+                case ECoinState.Fertilizer:
                     return addOrMinusMoney(farmOperation[2], false);
-                case CCoinState.Weed:
+                case ECoinState.Weed:
                     return addOrMinusMoney(farmOperation[3], false);
-                case CCoinState.Disease:
+                case ECoinState.Pet:
                     return addOrMinusMoney(farmOperation[4], false);
                 default:
                     return false;
@@ -81,18 +81,18 @@ namespace CeresMaize_Console_CS
         }
 
         //土地升级
-        bool processUpdateFarm(CCoinState state)
+        bool processUpdateFarm(ECoinState state)
         {
             return false;
         }
 
         //收获时金币操作
-        bool processSale(CCoinState state)
+        bool processSale(ECoinState state)
         {
             //暂时只有玉米
             switch (state)
             {
-                case CCoinState.Reap:
+                case ECoinState.Reap:
                     return addOrMinusMoney(seedSalePrice[0], true);
                 default:
                     return false;

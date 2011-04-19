@@ -35,7 +35,7 @@ namespace CeresMaize_Console_CS
             farm.Irrigation();
         }
 
-        public void ButtonFertilizer(CFertilizer fer)
+        public void ButtonFertilizer(EFertilizerType fer)
         {
             farm.Fertilizer(fer);
         }

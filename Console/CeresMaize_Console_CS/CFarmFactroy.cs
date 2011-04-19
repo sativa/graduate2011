@@ -10,7 +10,7 @@ namespace CeresMaize_Console_CS
         static public void PlantCrop(CFarm farm,CSeed seed)
         {
             // Factroy Method
-            if (seed.type == CSeedType.Maize_Normal)
+            if (seed.type == ESeedType.Maize_Normal)
             {
                 // Build CropStateGUI
                 CMaizeStateGUI maizeGUI = new CMaizeStateGUI(farm);
