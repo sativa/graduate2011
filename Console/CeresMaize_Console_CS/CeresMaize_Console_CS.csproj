@@ -42,7 +42,6 @@
     <Compile Include="CeresMaize_Logic.cs" />
     <Compile Include="CFarmFactroy.cs" />
     <Compile Include="CFarmGUI.cs" />
-    <Compile Include="CFertilizer.cs" />
     <Compile Include="CGameInfo.cs" />
     <Compile Include="Class.cs" />
     <Compile Include="CFarm.cs" />
