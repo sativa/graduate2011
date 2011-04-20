@@ -12,7 +12,6 @@ using System.Text;
         public CCrop crop = null;            // 当前种植的作物
         public CSeed lastCrop = null;      // 上次种植的作物，用于进行播种惩罚
 
-        public CCropStateGUI stateGUI = null; // TODO:U3D
         public string farmName; // 农田的名称，用于显示在GameInfo和GUI中
 
         public bool isAssart = false;         // 因测试需要才设定public，在U3D中将测试
@@ -126,7 +125,6 @@ using System.Text;
             else
             {
                 crop = null;
-                stateGUI = null;
 
                 isAssart = false;
                 isSeminate = false;
@@ -316,7 +314,7 @@ using System.Text;
                     inDry = true;
                     CGameInfo.GetInstance().AddInfo(farmName + "因缺水已处于干涸状态");
 
-                    farmMod.Switch(4);
+                    farmMod.ResetSwith();
                 }
             }
 
@@ -327,8 +325,8 @@ using System.Text;
                 {
                     inPoor = true;
                     CGameInfo.GetInstance().AddInfo(farmName + "因缺养分已处于贫瘠状态");
-                    
-                    farmMod.Switch(5);
+
+                    farmMod.ResetSwith();
                 }
             }
 
@@ -362,6 +360,15 @@ using System.Text;
                 isReap = IsReap();
                 if (isReap)
                     farmMod.Switch(3);
+            }
+
+            // 判定是否触发田鼠
+
+
+            // 判定是否触发星星
+            if (!inDry && !inPoor && !inWeed && !inPet)
+            {
+                farmMod.BreakStar();
             }
 
         }

@@ -12,8 +12,6 @@ using System.Text;
             if (seed.type == ESeedType.Maize_Normal)
             {
                 // Build CropStateGUI
-                CMaizeStateGUI maizeGUI = new CMaizeStateGUI(farm);
-                farm.stateGUI = maizeGUI;
 
                 // Build Crop Object
                 CeresMaize_Logic maizeLogic = new CeresMaize_Logic(farm);

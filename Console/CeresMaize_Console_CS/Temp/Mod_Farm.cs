@@ -9,4 +9,12 @@ using System.Text;
         public void Switch(int i)
         {
         }
+
+        public void ResetSwith()
+        {
+        }
+
+        public void BreakStar()
+        {
+        }
     }
