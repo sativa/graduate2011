@@ -49,11 +49,15 @@ OnGUI函数是重绘GUI必定执行的，绘制窗口必须在这里执行
 GUI.skin是设置窗口的皮肤
 GUI.Window是显示窗口，显示的窗口是在skin里设置的，包括贴图什么的
 GUI Skin是在Project中右键新建GUI Skin创建的，之后在脚本里写一个public GUISkin skin;再将创建的这个skin拖动上去就好了
-最重要：GUILayout.Label可以在这个窗口的相对位置打字
+最重要：
+在类中定义public的GUIStyle变量，在unity面板中对其修改，包括各种（一般、鼠标经过、点下等）背景图片、字体等，用于绘制GUI相关组件时作为函数参数使用
+GUILayout.Label可以在这个窗口的相对位置打字
 GUILayout.BeginVertical();后面写的都是在这一行
 GUILayout.BeginHorizontal();后面一次写一行
 GUILayout.EndHorizontal();结束一次写一行这种方式
+GUILayout.BeginArea(*****);限定用GUI绘制文字、按钮等内容的位置！！！This function is very useful when mixing GUILayout code.后面必须有EndArea函数
 GUILayout.Space(5);空5格
+
 
 触发器：
 Box Collider中的Is Trigger勾选
