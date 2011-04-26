@@ -50,7 +50,7 @@ GUI.skin是设置窗口的皮肤
 GUI.Window是显示窗口，显示的窗口是在skin里设置的，包括贴图什么的
 GUI Skin是在Project中右键新建GUI Skin创建的，之后在脚本里写一个public GUISkin skin;再将创建的这个skin拖动上去就好了
 最重要：
-在类中定义public的GUIStyle变量，在unity面板中对其修改，包括各种（一般、鼠标经过、点下等）背景图片、字体等，用于绘制GUI相关组件时作为函数参数使用
+在类中定义public的GUIStyle变量，在unity面板中对其修改，包括各种（一般、鼠标经过、点下等）背景图片、字体等（字的颜色在修改背景隔壁，而不是通过字的材质改），用于绘制GUI相关组件时作为函数参数使用
 GUILayout.Label可以在这个窗口的相对位置打字
 GUILayout.BeginVertical();后面写的都是在这一行
 GUILayout.BeginHorizontal();后面一次写一行
