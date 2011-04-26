@@ -1,0 +1,3 @@
+进C:\Windows\System32\drivers\etc
+用记事本打开hosts
+在最后一行加入66.249.89.104 code.google.com
