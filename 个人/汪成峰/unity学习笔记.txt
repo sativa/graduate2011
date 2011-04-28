@@ -86,3 +86,8 @@ var script : ScriptName = objectA.GetComponent(ScriptName);
 6、淡入淡出效果：每次绘制一幅黑色的图，alpha值会变而已，具体见地震demo项目
 7、添加美术资源后框上所有的部分，添加mesh collider即可（或者添加box collider，即可在外面添加一个方块碰撞）
 8、CharacterController可以实现人物的控制，并且自带刚体
+9、如何获得一个GameObject的子对象：
+Transform[] allChildren = parent.GetComponentsInChildren<Transform>();
+foreach (Transform child in allChildren){
+     //child.gameObject
+}
