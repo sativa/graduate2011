@@ -91,3 +91,7 @@ Transform[] allChildren = parent.GetComponentsInChildren<Transform>();
 foreach (Transform child in allChildren){
      //child.gameObject
 }
+10、强制设置分辨率并去除unity标志方法：Edit > Project Settings > Player中的Display Resolution Dialog可以禁止出现选择分辨率画面；开启专业版后在上述路径中的Other Setting中有个Static Batching会自动勾选，勾选之后就不会出现那种标志
+11、在unity面板中输入string的时候换行：在记事本中打好已换行的字复制粘贴到unity面板中
+
+
