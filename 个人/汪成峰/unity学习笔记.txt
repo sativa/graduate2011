@@ -58,6 +58,8 @@ GUILayout.EndHorizontal();结束一次写一行这种方式
 GUILayout.BeginArea(*****);限定用GUI绘制文字、按钮等内容的位置！！！This function is very useful when mixing GUILayout code.后面必须有EndArea函数
 GUILayout.Space(5);空5格
 
+使用billboard技术：
+Unity里没有现成的billboard组件，可以利用粒子系统实现，具体见地震逃生游戏千斤顶上面的箭头
 
 触发器：
 Box Collider中的Is Trigger勾选
