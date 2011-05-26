@@ -79,6 +79,24 @@ foreach(MeshRenderer temp in schoolbagMesh)……
 1、在U3D面板中将玩家和不需要判断的GameObject的layer选择Ignore Raycast，否则玩家跑快了会自己挡住自己！！
 2、所有的透明的触发器虽然把MeshRenderer取消了，但还带碰撞体，所以也必须勾选Ignore Raycast
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+移动平台相关操作：
+触摸屏幕：
+if (Input.touchCount > 0)...
+
+判断摸到某个HUD响应事件：
+if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && guiTexture.HitTest(Input.GetTouch(0).position))
+	OnMouseDown();
+PS：OnMouseDown函数对应的是PC版的鼠标点中该HUD的响应，该段代码仅适合单点触摸
+
+判断摸到场景中某个GameObject的响应：
+见Input.GetTouch函数的最后一个例子，利用物理库的RayCast进行判定
+PS：能响应的GameObject必须带有碰撞体
+
+触摸滑动：
+利用Input.GetTouch获得Touch，其中的deltaPosition可用于判断向屏幕哪边滑
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 其他：
 1、如果用cube套着一个子弹作为perfab，且在作为perfab之前Mesh Render没取消，那么取消之后必须更新perfab才会起作用（切记，复制的物体属性和perfab是一样的）
 2、使用另一个GameObject中的script定义的变量
