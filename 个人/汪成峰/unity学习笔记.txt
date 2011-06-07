@@ -115,5 +115,5 @@ foreach (Transform child in allChildren){
 }
 10、强制设置分辨率并去除unity标志方法：Edit > Project Settings > Player中的Display Resolution Dialog可以禁止出现选择分辨率画面；开启专业版后在上述路径中的Other Setting中有个Static Batching会自动勾选，勾选之后就不会出现那种标志
 11、在unity面板中输入string的时候换行：在记事本中打好已换行的字复制粘贴到unity面板中
-
+12、若调用的某个函数里有用yield进行延时，则在外层套一个StartCoroutine函数则可用使其立即返回，调用它的函数不会阻塞
 
