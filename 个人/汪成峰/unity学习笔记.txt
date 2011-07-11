@@ -128,3 +128,14 @@ foreach (Transform child in allChildren){
 6、若调用的某个函数里有用yield进行延时，则在外层套一个StartCoroutine函数则可用使其立即返回，调用它的函数不会阻塞;在循环语句中yield return 0;可以达到每帧都运行的效果，同时代码不必在Update中出现，具体见教程第28节17:46
 7、可以用一个简单的MeshCollider套在外面进行碰撞检测，不一定要用原先的Mesh也可以获得比较精确的碰撞检测
 
+
+
+在iPhone上使用XML的步骤（使用XMLParser的3个.cs文件）
+1、TextAsset text = (TextAsset)Resources.Load("***");	***为resources文件夹下的XML文件
+2、XMLParser parser = new XMLParser();XMLNode node = parser.Parse(text.text);	将读取到的XML文件传给解析器
+之后调用相关API即可读取相关数据，有3种方法
+1、node.GetValue("system1>0>item>0>@label")
+2、node.GetNodeList("system1>0>item")	用foreach则可以遍历其中的所有子节点
+foreach (XMLNode mynode in list)
+	Debug.Log(mynode.GetValue("@label"));	可以在这里获得每个子节点的一个或多个属性值
+3、node.GetNode("example>0>value>1")	获得某个节点
