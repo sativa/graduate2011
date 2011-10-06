@@ -91,11 +91,32 @@ PS：OnMouseDown函数对应的是PC版的鼠标点中该HUD的响应，该段代码仅适合单点触摸
 
 判断摸到场景中某个GameObject的响应：
 见Input.GetTouch函数的最后一个例子，利用物理库的RayCast进行判定
+if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)        {            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);            RaycastHit hit;            if (Physics.Raycast(ray, out hit))            {                if (hit.collider.gameObject == gameObject)                {                    OnMouseDown();                }            }        }
 PS：能响应的GameObject必须带有碰撞体
 
 触摸滑动：
-利用Input.GetTouch获得Touch，其中的deltaPosition可用于判断向屏幕哪边滑
+方法1利用Input.GetTouch获得Touch，其中的deltaPosition可用于判断向屏幕哪边滑（其他相关的可以看官网示例或者iPhone 3D游戏编程指南）
+方法2：给物体加上碰撞器以后，用OnMouseDrag()函数写（这个方法用于滑动到某个GameObject上的检测）
+
+使用sm2插件做2D游戏：
+教程在E盘Unity文件夹里，用的时候别忘了先处理图片格式！
+搞定了一个GameObject之后别忘了把Pixel Perfect钩钩去掉，否则这个图片大小会随着分辨率的改变而改变！
+心得：
+即使是插入一个静态图片，也要执行所有的过程，Build Atlases后之前的图片就没用了，以后要用到图片都从后面那里提取了
+每次记得复制一个material出来，一组动画只能对应一个material,切记，别乱给material赋值，修改动画了重新Build Atlases一下就好了（管理方法：相关的material存一个文件夹里，相关的生成后的图片存一个文件夹里）
+生成的图片名称和所在的material名称是一样的，所以这些图片就放在他默认的文件夹里就好了，以便后期修改再生成这个图片
+
+
+屏幕横竖切换：
+在unity3d中build setting中 选择ios    第一项 Default Orientation 中更改为Auto rotation即可，在下面的选项也可以打勾进行更详细的设置
+（在3.4及其以上版本以上才有）
+
+在iPhone上按Home键调用这个函数：OnApplicationPause
+如果半途中有短信中断游戏，应该会调用OnApplicationFocus或OnApplicationPause函数（具体没试过，不清楚）
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+防止iPhone睡眠的相关设置：
+iPhoneSettings里有相关设置
 
 其他：
 1、如果用cube套着一个子弹作为perfab，且在作为perfab之前Mesh Render没取消，那么取消之后必须更新perfab才会起作用（切记，复制的物体属性和perfab是一样的）
@@ -118,6 +139,7 @@ foreach (Transform child in allChildren){
 12、若调用的某个函数里有用yield进行延时，则在外层套一个StartCoroutine函数则可用使其立即返回，调用它的函数不会阻塞
 13、Resources.LoadAssetAtPath函数可以利用路径来加载资源（仅在编辑器模式下有效）
 14、使用Movie Texture	http://unity3d.com/support/documentation/Manual/Video%20Files.html
+15、Unity3D支持Remote调试，具体方法在Unity文件夹里有记录
 
 
 看完用Unity3D做2D游戏的视频总结：
