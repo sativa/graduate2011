@@ -87,7 +87,14 @@ if (Input.touchCount > 0)...
 判断摸到某个HUD响应事件：
 if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && guiTexture.HitTest(Input.GetTouch(0).position))
 	OnMouseDown();
-PS：OnMouseDown函数对应的是PC版的鼠标点中该HUD的响应，该段代码仅适合单点触摸
+PS：OnMouseDown函数对应的是PC版的鼠标点中该HUD的响应，该段代码仅适合单点触摸，多点的如下
+        int i = 0;
+        while (i < Input.touchCount)
+        {
+            if (Input.GetTouch(i).phase == TouchPhase.Began && guiText.HitTest(Input.GetTouch(0).position))
+                OnMouseDown();
+            i++;
+        }
 
 判断摸到场景中某个GameObject的响应：
 见Input.GetTouch函数的最后一个例子，利用物理库的RayCast进行判定
