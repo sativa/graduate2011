@@ -98,8 +98,7 @@ PS：OnMouseDown函数对应的是PC版的鼠标点中该HUD的响应，该段代码仅适合单点触摸，多
 
 判断摸到场景中某个GameObject的响应：
 见Input.GetTouch函数的最后一个例子，利用物理库的RayCast进行判定
-if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)        {            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);            RaycastHit hit;            if (Physics.Raycast(ray, out hit))            {                if (hit.collider.gameObject == gameObject)                {                    OnMouseDown();                }            }        }
-PS：能响应的GameObject必须带有碰撞体
+if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)        {            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);            RaycastHit hit;            if (Physics.Raycast(ray, out hit))            {                if (hit.collider.gameObject == gameObject)                {                    OnMouseDown();                }            }        }PS：能响应的GameObject必须带有碰撞体
 
 触摸滑动：
 方法1利用Input.GetTouch获得Touch，其中的deltaPosition可用于判断向屏幕哪边滑（其他相关的可以看官网示例或者iPhone 3D游戏编程指南）
@@ -119,8 +118,7 @@ PS：能响应的GameObject必须带有碰撞体
 （在3.4及其以上版本以上才有）
 
 在iPhone上按Home键调用这个函数：OnApplicationPause
-如果半途中有短信中断游戏，应该会调用OnApplicationFocus或OnApplicationPause函数（具体没试过，不清楚）
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+如果半途中有短信中断游戏，应该会调用OnApplicationFocus或OnApplicationPause函数（具体没试过，不清楚）//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 防止iPhone睡眠的相关设置：
 iPhoneSettings里有相关设置
@@ -147,6 +145,9 @@ foreach (Transform child in allChildren){
 13、Resources.LoadAssetAtPath函数可以利用路径来加载资源（仅在编辑器模式下有效）
 14、使用Movie Texture	http://unity3d.com/support/documentation/Manual/Video%20Files.html
 15、Unity3D支持Remote调试，具体方法在Unity文件夹里有记录
+16、Screen.orientation = ScreenOrientation.LandscapeLeft可以把界面转90°，当然也可以在Player Settings里面改
+17、禁止屏幕变暗Screen.sleepTimeout = 0;
+18、可以在Editor里重写Inspector，可以很方便的对一些数组赋值，具体见OpenNI的那个Unity3D包里的东西，几个基本的脚本就被重写了Inspector
 
 
 看完用Unity3D做2D游戏的视频总结：
